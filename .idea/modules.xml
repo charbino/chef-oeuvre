@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/chef-oeuvre.iml" filepath="$PROJECT_DIR$/.idea/chef-oeuvre.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sf-elastica/.idea/sf-elastica.iml" filepath="$PROJECT_DIR$/../sf-elastica/.idea/sf-elastica.iml" />
+    </modules>
+  </component>
+</project>
