@@ -2,17 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b0fd7d3-229f-4135-a5a9-fc845407a3e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.php-version" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/Impots.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/ResultImpots.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/models/Bareme.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/models/DetailsImpotsInterface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/models/FoyerFiscal.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/models/SimulationImpot.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/models/Tranche.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/models/TrancheInterface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/models/TrancheInterfaceResults.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/impots/utils/barems-impots.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/styles/app.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Impot/ImpotController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/navbar.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/impots/impots.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -162,24 +189,27 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/Controller" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/assets/js/components/impots" />
+      <recent name="$PROJECT_DIR$/assets/js/components/impots/models" />
+      <recent name="$PROJECT_DIR$/src/Controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/js/components/impots" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
-      <option name="pathToComposerJson" value="$PROJECT_DIR$/composer.json" />
-      <method v="2" />
-    </configuration>
     <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
@@ -194,7 +224,8 @@
       <option name="presentableId" value="Default" />
       <updated>1640782983857</updated>
       <workItem from="1640782985335" duration="9000" />
-      <workItem from="1640783014059" duration="1430000" />
+      <workItem from="1640783014059" duration="8942000" />
+      <workItem from="1640796730970" duration="6597000" />
     </task>
     <servers />
   </component>
