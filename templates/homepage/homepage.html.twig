@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="title is-1">Projet chef d'oeuvre</h1>
+    <section class="section">
+        <p class="block">
+            Le projet <strong>Chef d'Oeuvre</strong> est un projet qui me permet d'experimenter toutes les technologies que je souhaite.
+        </p>
+        <p class="block">Ce projet repose sur un socle <span class="tag is-link">Symfony 5</span> et <span class="tag is-link">VueJs 3</span> et utilise docker pour toutes les briques externes (elasticsearch, mysql, redis ...)</p>
+    </section>
+    <section class="section">
+        <h2 class="title">Projets</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="card has-background-link-light">
+                    <div class="card-content">
+                        <div class="content">
+                            <h3 class="title">Calculateur Impot</h3>
+                            <p>Permet de calculer le montant de votre impot sur le revenue</p>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="{{ path('impots_index') }}" class="card-footer-item">Voir plus</a>
+                    </footer>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card has-background-link-light">
+                    <div class="card-content">
+                        <div class="content">
+                            <h3 class="title">ISS</h3>
+                            <p>Permet de voir où se trouve l'iss en temps réel.</p>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="{{ path('iss_index') }}" class="card-footer-item">Voir plus</a>
+                    </footer>
+                </div>
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <h2 class="title">Todo</h2>
+        <ul>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox" checked>
+                    Calculateur Impots
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox" checked>
+                    Where is ISS
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Recherche elasticsearch
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Tester CI/CD
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Mercure
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    test / panther
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    symfony workflow
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Rabbit MQ
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Redis
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Matomo
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Mailhog / Mail Dev
+                </label>
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    N8n ?
+                </label>
+            </li>
+        </ul>
+    </section>
+{% endblock %}
+

@@ -8,6 +8,8 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 import Impots from "./js/components/impots/Impots";
+import Iss from "./js/components/iss/Iss";
+
 import Vue from "vue"
 
 
@@ -17,5 +19,14 @@ if (appImpots) {
         el: '#app-impots',
         components: {Impots},
         template: '<Impots/>',
+    });
+}
+
+const appIss = document.getElementById('app-iss');
+if (appIss) {
+    new Vue({
+        el: '#app-iss',
+        components: {Iss},
+        template: '<Iss/>',
     });
 }

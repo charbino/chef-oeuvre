@@ -16,9 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
  * @author Sébastien Framinet <sebastien.framinet@asdoria.com>
  */
 #[Route(path: '/', name: 'homepage')]
-class Homepage extends AbstractController
+class HomepageController extends AbstractController
 {
-
 
     #[Route('/', name: '_index')]
     public function index(Request $request, SessionInterface $session): Response

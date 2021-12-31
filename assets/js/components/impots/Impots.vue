@@ -148,7 +148,6 @@ export default {
          */
         init() {
             // this.calc();
-            console.log(this.$refs.netRevenues)
             this.$refs.netRevenues.focus();
         },
         /**

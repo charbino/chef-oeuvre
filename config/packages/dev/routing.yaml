@@ -1,0 +1,9 @@
+framework:
+    router:
+        strict_requirements: true
+        http_port: 8000
+#parameters:
+#    router.request_context.host: 8000
+#
+#fos_js_routing:
+#    port: 8000
