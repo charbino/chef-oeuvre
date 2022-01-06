@@ -1,11 +1,25 @@
 @charset "utf-8";
 
-@import "~leaflet/dist/leaflet.css";
+
 @import "~bulma/bulma.sass";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
-
+@import "~@mdi/font/css/materialdesignicons.min.css";
+@import 'buefy/dist/buefy.css';
 
 .bd-navbar {
   //font-size: 1.125rem;
   //padding: 2rem 4rem;
 }
+
+
+.map {
+  position: absolute;
+  overflow: hidden
+}
+
+.section-map{
+  width: 100%;
+  height: 400px;
+}
+
+@import "~leaflet/dist/leaflet.css";

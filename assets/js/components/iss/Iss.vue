@@ -9,7 +9,7 @@
             :delais="this.getDelaisInSeconde()"
         ></Header>
 
-        <article class="media">
+        <article class="media section-map">
             <l-map
                 :zoom="zoom"
                 :center="center"
@@ -113,10 +113,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.map {
-    position: absolute;
-    width: 100%;
-    height: 500px;
-    overflow: hidden
-}
+
 </style>

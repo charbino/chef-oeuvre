@@ -37,9 +37,9 @@ class IssController extends AbstractController
     #[Route('/position', name: '_position', options: ['expose' => true])]
     public function getPosition(Request $request, IssClient $client)
     {
-        if (!$request->isXmlHttpRequest()) {
-            return new AccessDeniedException();
-        }
+//        if (!$request->isXmlHttpRequest()) {
+//            return new AccessDeniedException();
+//        }
 
         $result = $client->getCurrentPosition();
 

@@ -7,11 +7,16 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
+
+
 import Impots from "./js/components/impots/Impots";
 import Iss from "./js/components/iss/Iss";
+import City from './js/components/city/City'
 
 import Vue from "vue"
-
+import Buefy from 'buefy'
+// Vue.use(Buefy)
+Vue.use(Buefy, { defaultIconPack: 'fas' })
 
 const appImpots = document.getElementById('app-impots');
 if (appImpots) {
@@ -28,5 +33,14 @@ if (appIss) {
         el: '#app-iss',
         components: {Iss},
         template: '<Iss/>',
+    });
+}
+
+const appCity = document.getElementById('app-city');
+if (appCity) {
+    new Vue({
+        el: '#app-city',
+        components: {City},
+        template: '<City/>'
     });
 }
