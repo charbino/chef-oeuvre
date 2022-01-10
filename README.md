@@ -49,8 +49,10 @@ TODO
 - [ ] Mailhog / Mail Dev 
 - [ ] N8n ? 
 - [ ] Logs dans KIBANA
-Fonctionnalité: 
-- [ ] Afficher le contour d'une commune (avec les coordonnées GPS)
+
+
+#### Fonctionnalitées: 
+- [x] Afficher le contour d'une commune (avec les coordonnées GPS)
 
 
 

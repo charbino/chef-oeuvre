@@ -14,6 +14,8 @@ use Psr\Http\Message\ResponseInterface;
 class CityClient extends Client
 {
     const URL = "https://geo.api.gouv.fr/";
+
+
     const URL_COMMUNES = "communes";
     const URL_DEPARMENTS = "departements";
 
@@ -29,8 +31,6 @@ class CityClient extends Client
 
 
     /**
-     * EssenceClient constructor.
-     *
      * @param array $config
      */
     public function __construct(array $config = [])
@@ -45,7 +45,7 @@ class CityClient extends Client
      */
     protected function getFields(): array
     {
-        return ['fields' => 'nom,code,centre,codePostaux,departement'];
+        return ['fields' => 'nom,code,centre,codesPostaux,departement'];
     }
 
     /**
@@ -149,5 +149,6 @@ class CityClient extends Client
             ]);
 
     }
+
 
 }

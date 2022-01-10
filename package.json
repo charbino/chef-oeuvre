@@ -29,6 +29,7 @@
         "bulma": "^0.9.3",
         "eslint-import-resolver-typescript": "^2.5.0",
         "leaflet": "^1.7.1",
+        "lodash": "^4.17.21",
         "tsd": "^0.19.1",
         "vue2-leaflet": "^2.7.1"
     }

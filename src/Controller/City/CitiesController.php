@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller\City;
 
+use App\Client\CadastreClient;
 use App\Client\CityClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -99,4 +100,6 @@ class CitiesController extends AbstractController
 
         return new JsonResponse(['cities' => $cities]);
     }
+
+
 }
