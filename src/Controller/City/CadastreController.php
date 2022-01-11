@@ -31,7 +31,13 @@ class CadastreController extends AbstractController
 
         $query = $request->query->get('query');
         $city = $cadastreClient->getCity($query);
+        $plots = null;
+        $parcelles = null;
+        if (!empty($city)) {
+            $plots = $cadastreClient->getPlots($city->features[0]);
+            $parcelles = $cadastreClient->getParcelles($city->features[0]);
+        }
 
-        return new JsonResponse(['city' => $city->features[0]]);
+        return new JsonResponse(['city' => $city->features[0], 'plots' => $plots, 'parcelles' => $parcelles]);
     }
 }

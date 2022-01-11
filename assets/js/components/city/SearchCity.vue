@@ -33,7 +33,9 @@
                 <li v-for="(city,index) in citiesSelected" :key="index">
                         <span class="icon-text">
                             <span>{{ city.properties.code_insee }} - {{ city.properties.nom_com }}</span>
+                               <span class="icon" @click="center(city)"><i class="fas fa-crosshairs"></i></span>
                             <span class="icon" @click="removeCity(city)"> <i class="fas fa-times"></i></span>
+
                         </span>
                 </li>
             </ul>
@@ -63,9 +65,9 @@ export default {
             api.getCityInformationFromCadastre(this.selected.code)
                 .then(r => r.json())
                 .then(data => {
-                    const {city} = data;
-                    this.$root.$emit(EVENT_NAME.DISPLAY_CITY, city)
-                    this.citiesSelected.push(city)
+
+                    this.$root.$emit(EVENT_NAME.DISPLAY_CITY, data)
+                    this.citiesSelected.push(data.city)
                 }).catch((error) => {
                 throw error
             }).finally(() => {
@@ -92,6 +94,9 @@ export default {
                 this.isFetching = false;
             });
         }, 1000),
+        center(city){
+            this.$root.$emit(EVENT_NAME.CENTER_CITY, city)
+        },
         removeCity(city) {
             this.citiesSelected = this.citiesSelected.filter(c => c.properties.code_insee !== city.properties.code_insee);
             this.$root.$emit(EVENT_NAME.REMOVE_CITY, city)
