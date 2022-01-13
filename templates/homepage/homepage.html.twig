@@ -54,12 +54,24 @@
                 </div>
             </div>
             <div class="column">
+                <div class="card has-background-link-light">
+                    <div class="card-content">
+                        <div class="content">
+                            <h3 class="title">Messenger</h3>
+                            <p>Permet d'envoyer un message à RabbitMq</p>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="{{ path('messenger_test') }}" class="card-footer-item">Voir plus</a>
+                    </footer>
+                </div>
             </div>
         </div>
     </section>
     <div class="columns">
         {{ include('homepage/todo.html.twig') }}
         {{ include('homepage/apis.html.twig') }}
+        {{ include('homepage/ports.html.twig') }}
     </div>
 {% endblock %}
 

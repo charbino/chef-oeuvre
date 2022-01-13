@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | User{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <h1 class="title is-1">Hello {{ controller_name }}! ✅</h1>
+        <div class="content">
+            This friendly message is coming from:
+            <ul>
+                <li>Your controller at <code><a
+                                href="{{ '/home/sframinet/Workspace/site/symfony/chef-oeuvre/src/Controller/HomeUserController.php'|file_link(0) }}">src/Controller/HomeUserController.php</a></code>
+                </li>
+                <li>Your template at <code><a
+                                href="{{ '/home/sframinet/Workspace/site/symfony/chef-oeuvre/templates/home_user/index.html.twig'|file_link(0) }}">templates/home_user/index.html.twig</a></code>
+                </li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
