@@ -67,3 +67,14 @@ services:
             - "ELASTICSEARCH_URL=http://elasticsearch"
         depends_on:
             - elasticsearch
+
+    rabbitmq:
+        container_name: rabbitmq
+        image: rabbitmq:3.7-management
+        ports:
+            - "5673:5672"
+            - "15673:15672"
+    n8n:
+        image: n8nio/n8n
+        ports:
+            - "5678:5678"

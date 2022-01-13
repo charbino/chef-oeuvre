@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+
+
+    <section class="section">
+        <h1 class="title is-1">Test Messenger</h1>
+        <h2 class="subtitle is-2"> with rabbitMq and N8N</h2>
+        <p class="block">
+            Symfony application send message to rabbitMq. After N8n read rabbitMq Message.
+        </p>
+        <p>
+            To consume message with php, you can exec :
+        </p>
+        <pre>symfony console messenger:consume async -vv</pre>
+        <br>
+        <div class="content">
+            <div class="block">
+                <h3 class="title is-3"> Liens </h3>
+                <ul>
+                    <li><a href="http://127.0.0.1:5678">N8N</a></li>
+                    <li><a href="http://127.0.0.1:15673">RabbitMq</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}
