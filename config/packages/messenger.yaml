@@ -12,6 +12,7 @@ framework:
         routing:
             # Route your messages to the transports
              'App\Message\TestNotification': async
+             'App\Message\UploadMessage': async
 
         serializer:
             default_serializer: messenger.transport.symfony_serializer

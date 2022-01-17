@@ -1,5 +1,7 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    form_themes: ['form/chef_oeuvre_theme.html.twig']
+    debug: true
 
 when@test:
     twig:

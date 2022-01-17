@@ -20,7 +20,7 @@ class UploadType extends AbstractType
                 'allow_delete' => true,
                 'download_uri' => false,
                 'image_uri' => false,
-                'label' => false
+                'label' => "Download"
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Upload'

@@ -22,6 +22,9 @@ class Upload
     #[Vich\UploadableField(mapping: 'upload', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'uploads')]
+    private $uploadBy;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,5 +50,17 @@ class Upload
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    public function getUploadBy(): ?User
+    {
+        return $this->uploadBy;
+    }
+
+    public function setUploadBy(?User $uploadBy): self
+    {
+        $this->uploadBy = $uploadBy;
+
+        return $this;
     }
 }

@@ -18,6 +18,10 @@ import Buefy from 'buefy'
 // Vue.use(Buefy)
 Vue.use(Buefy, { defaultIconPack: 'fas' })
 
+
+import formInit from './js/common/form'
+formInit();
+
 const appImpots = document.getElementById('app-impots');
 if (appImpots) {
     new Vue({
