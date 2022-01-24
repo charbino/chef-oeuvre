@@ -83,3 +83,31 @@ services:
         container_name: redis
         image: redis:5-alpine
         ports: [6379]
+
+    imaginary:
+        image: h2non/imaginary:latest
+        # optionally mount a volume as local image source
+        volumes:
+            - ./images:/mnt/data
+        environment:
+            PORT: 9000
+        command: -enable-url-source -mount /mnt/data
+        ports:
+            - "9001:9000"
+
+    mailer:
+        image: maildev/maildev
+        ports:
+            - "1180:80"
+
+    minio:
+        image: minio/minio
+        environment:
+            MINIO_ROOT_USER: access1234
+            MINIO_ROOT_PASSWORD: secret1234
+        volumes:
+            -   ./data/minio:/data
+        command: server /data --console-address ":9002"
+        ports:
+            - "9090:9000"
+            - "9002:9002"
