@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e38c28ffbe7302a58641e8dca226b925",
+    "content-hash": "39bec69c06e85fb3476b91e9d95a8ab8",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -4832,28 +4832,28 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.17.6",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "7a79135e1dc66b30042b4d968ecba0908f9374bc"
+                "reference": "82891fd872056499ce7a7c4aca7ffeb86a341878"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/7a79135e1dc66b30042b4d968ecba0908f9374bc",
-                "reference": "7a79135e1dc66b30042b4d968ecba0908f9374bc",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/82891fd872056499ce7a7c4aca7ffeb86a341878",
+                "reference": "82891fd872056499ce7a7c4aca7ffeb86a341878",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0|^2.0",
-                "php": ">=7.1"
+                "composer-plugin-api": "^2.1",
+                "php": ">=8.0"
             },
             "require-dev": {
-                "composer/composer": "^1.0.2|^2.0",
-                "symfony/dotenv": "^4.4|^5.0|^6.0",
-                "symfony/filesystem": "^4.4|^5.0|^6.0",
-                "symfony/phpunit-bridge": "^4.4.12|^5.0|^6.0",
-                "symfony/process": "^4.4|^5.0|^6.0"
+                "composer/composer": "^2.1",
+                "symfony/dotenv": "^5.4|^6.0",
+                "symfony/filesystem": "^5.4|^6.0",
+                "symfony/phpunit-bridge": "^5.4|^6.0",
+                "symfony/process": "^5.4|^6.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -4877,7 +4877,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.17.6"
+                "source": "https://github.com/symfony/flex/tree/v2.1.2"
             },
             "funding": [
                 {
@@ -4893,7 +4893,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-29T15:39:37+00:00"
+            "time": "2022-01-19T17:52:43+00:00"
         },
         {
             "name": "symfony/form",
@@ -8574,6 +8574,90 @@
             "time": "2021-11-23T21:36:27+00:00"
         },
         {
+            "name": "symfony/ux-chartjs",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ux-chartjs.git",
+                "reference": "1bcbef6069ce9e8aee089d769fb00d72aa8e23d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ux-chartjs/zipball/1bcbef6069ce9e8aee089d769fb00d72aa8e23d4",
+                "reference": "1bcbef6069ce9e8aee089d769fb00d72aa8e23d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/config": "^4.4.17|^5.0|^6.0",
+                "symfony/dependency-injection": "^4.4.17|^5.0|^6.0",
+                "symfony/http-kernel": "^4.4.17|^5.0|^6.0"
+            },
+            "conflict": {
+                "symfony/flex": "<1.13",
+                "symfony/webpack-encore-bundle": "<1.11"
+            },
+            "require-dev": {
+                "symfony/framework-bundle": "^4.4.17|^5.0|^6.0",
+                "symfony/phpunit-bridge": "^5.2|^6.0",
+                "symfony/twig-bundle": "^4.4.17|^5.0|^6.0",
+                "symfony/var-dumper": "^4.4.17|^5.0|^6.0",
+                "symfony/webpack-encore-bundle": "^1.11"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/ux",
+                    "url": "https://github.com/symfony/ux"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\UX\\Chartjs\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Titouan Galopin",
+                    "email": "galopintitouan@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Chart.js integration for Symfony",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "symfony-ux"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/ux-chartjs/tree/v2.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-12-09T16:09:32+00:00"
+        },
+        {
             "name": "symfony/validator",
             "version": "v5.4.1",
             "source": {
@@ -11727,5 +11811,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.2.0"
 }

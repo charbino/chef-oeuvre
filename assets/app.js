@@ -8,6 +8,7 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 
+import { startStimulusApp } from '@symfony/stimulus-bridge';
 
 import Impots from "./js/components/impots/Impots";
 import Iss from "./js/components/iss/Iss";
@@ -48,3 +49,9 @@ if (appCity) {
         template: '<City/>'
     });
 }
+
+export const app = startStimulusApp(require.context(
+    '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
+    true,
+    /\.(j|t)sx?$/
+));

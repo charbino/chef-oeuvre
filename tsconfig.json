@@ -5,6 +5,9 @@
     "module": "es2015",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "noEmit": false,
+    "declaration": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

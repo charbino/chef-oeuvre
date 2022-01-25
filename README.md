@@ -54,6 +54,7 @@ TODO
 - [x] Mailhog / Mail Dev 
 - [x] N8n  
 - [ ] Logs dans KIBANA
+- [ ] Charts JS
 
 
 #### Fonctionnalitées: 

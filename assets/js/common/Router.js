@@ -23,7 +23,7 @@ class Router {
      * @returns {*}
      */
     generate(route, params = {}) {
-        return this.routing.generate(route, params, true);
+        return this.routing.generate(route, params);
     }
 }
 
