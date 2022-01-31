@@ -14,14 +14,18 @@ import Impots from "./js/components/impots/Impots";
 import Iss from "./js/components/iss/Iss";
 import City from './js/components/city/City'
 
+import * as mercure from './js/components/mercure'
+import formInit from './js/common/form'
+
 import Vue from "vue"
 import Buefy from 'buefy'
 // Vue.use(Buefy)
 Vue.use(Buefy, { defaultIconPack: 'fas' })
 
 
-import formInit from './js/common/form'
+
 formInit();
+mercure.init();
 
 const appImpots = document.getElementById('app-impots');
 if (appImpots) {

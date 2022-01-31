@@ -9,8 +9,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\HubInterface;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 #[Route('/user/overkill', name: 'overkill')]
 class OverkillController extends AbstractController
@@ -27,7 +34,7 @@ class OverkillController extends AbstractController
     }
 
     #[Route('/', name: '_index')]
-    public function index(Request $request, MessageBusInterface $messageBus): Response
+    public function index(Request $request, MessageBusInterface $messageBus, HubInterface $hub): Response
     {
 
         $upload = new Upload();
@@ -40,6 +47,7 @@ class OverkillController extends AbstractController
             $this->em->flush();
 
             $messageBus->dispatch(new UploadMessage($upload->getImageFile(), $this->getUser()->getUserIdentifier()));
+            $this->sendMercure($hub, $this->getUser());
 
             return $this->redirectToRoute('overkill_index');
         }
@@ -47,5 +55,22 @@ class OverkillController extends AbstractController
         return $this->render('overkill/index.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @param HubInterface $hub
+     * @param UserInterface $user
+     * @return void
+     */
+    private function sendMercure(HubInterface $hub, UserInterface $user)
+    {
+
+//        $encoders = [new JsonEncoder()];
+//        $normalizers = [new ObjectNormalizer()];
+//
+//        $serializer = new Serializer($normalizers, $encoders);
+
+        $update = new Update('overkill_send',json_encode(['id'=>$user->getUserIdentifier()]));
+        $hub->publish($update);
     }
 }
