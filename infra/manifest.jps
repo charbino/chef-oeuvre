@@ -1,0 +1,130 @@
+type: install
+name: Chef-oeuvre
+id: chef-oeuvre
+categories: ["apps/dev-and-admin-tools"]
+logo: https://symfony.com/logos/symfony_black_03.png
+homepage: https://github.com/charbino/chef-oeuvre
+baseUrl: https://raw.githubusercontent.com/charbino/chef-oeuvre/main/
+
+description: |
+    Ficher d'infrastructure As Code pour le projet "Chef d'oeuvre"
+
+ssl: true
+
+nodes:
+  - nodeType: nginx
+    nodeGroup: bl
+    count: 1
+    cloudlets: 8
+    displayName: LoadBalancer
+
+  - image: php8.1.2-apache
+    nodeGroup: cp
+    count: 1
+    cloudlets: 8
+    displayName: FrontWeb
+    volumes:
+      - /var/www
+
+  - noteType: postgresql
+    nodeGroup: sqlbd
+    count: 1
+    cloudlets: 8
+    displayName: SQLBD
+    env:
+      password: ${fn.password}
+    volumes:
+      - /var/lib/pgsql/data
+    isSLBAccessEnabled: false
+
+  - image: redis:-alpine
+    nodeGroup: redis
+    count: 1
+    cloudlets: 8
+    displayName: Redis
+    isSLBAccessEnabled: false
+
+ - image: h2non/imaginary:latest
+    count: 1
+    cloudlets: 8
+    nodeGroup: imaginary
+    displayName: Imaginary
+    volumes:
+      - /mnt/data
+    env:
+      PORT: 9000
+    isSLBAccessEnabled: false
+
+  - image: rabbitmq:3.7-management
+    count: 1
+    cloudlets: 8
+    nodeGroup: rabbitmq
+    displayName: RabbitMQ
+    isSLBAccessEnabled: false
+
+  - image: n8nio/n8n
+    count: 1
+    cloudlets: 8
+    nodeGroup: n8n
+    displayName: N8N
+
+  - image: schickling/mailcatcher
+    count: 1
+    cloudlets: 8
+    nodeGroup: mailcatcher
+    displayName: MailCatcher
+
+
+onInstall:
+  - composer
+  - symfonycli
+  - git
+  - apacheConf
+  - npm
+  - php
+
+actions:
+  composer:
+    cmd[cp]: |-
+      curl -sS https://getcomposer.org/installer | php
+      mv composer.phar /usr/bin/composer
+      chmod +x /usr/bin/composer
+    user: root
+
+  symfonycli:
+    cmd[cp]: |-
+      echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' | tee /etc/apt/sources.list.d/symfony-cli.list
+      apt update
+      apt install symfony-cli
+    user: root
+
+  git:
+    cmd[cp]: |-
+      apt-get install -yqq --no-install-recommends git
+
+  apacheConf:
+    cmd[cp]: |-
+      cd /var/www
+      mkdir public
+      cd /var/www/public
+      touch index.php
+      cd /etc/apache2/sites-enabled
+      rm 000-default.conf
+      wget https://raw.githubusercontent.com/yoanbernabeu/Symfony-Jelastic/main/config/apache.conf
+      apachectl restart
+
+  npm:
+    cmd[cp]: |-
+      apt install nodejs npm
+
+  php:
+    cmd[cp]: |-
+        curl -sSLf \
+        -o /usr/local/bin/install-php-extensions \
+        https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
+        chmod +x /usr/local/bin/install-php-extensions && \
+        install-php-extensions intl pgsql pdo pdo_pgsql redis amqp
+
+
+success: |
+  Your Chef d'oeuvre environment is ready to go!
