@@ -15,13 +15,13 @@ nodes:
   - nodeType: nginx
     nodeGroup: bl
     count: 1
-    cloudlets: 8
+    cloudlets: 1
     displayName: LoadBalancer
 
   - image: php8.1.2-apache
     nodeGroup: cp
     count: 1
-    cloudlets: 8
+    cloudlets: 1
     displayName: FrontWeb
     volumes:
       - /var/www
@@ -29,7 +29,7 @@ nodes:
   - noteType: postgresql
     nodeGroup: sqlbd
     count: 1
-    cloudlets: 8
+    cloudlets: 1
     displayName: SQLBD
     env:
       password: ${fn.password}
@@ -37,16 +37,9 @@ nodes:
       - /var/lib/pgsql/data
     isSLBAccessEnabled: false
 
-  - image: redis:-alpine
-    nodeGroup: redis
+  - image: h2non/imaginary:latest
     count: 1
-    cloudlets: 8
-    displayName: Redis
-    isSLBAccessEnabled: false
-
- - image: h2non/imaginary:latest
-    count: 1
-    cloudlets: 8
+    cloudlets: 1
     nodeGroup: imaginary
     displayName: Imaginary
     volumes:
@@ -55,25 +48,11 @@ nodes:
       PORT: 9000
     isSLBAccessEnabled: false
 
-  - image: rabbitmq:3.7-management
-    count: 1
-    cloudlets: 8
-    nodeGroup: rabbitmq
-    displayName: RabbitMQ
-    isSLBAccessEnabled: false
-
   - image: n8nio/n8n
     count: 1
-    cloudlets: 8
+    cloudlets: 1
     nodeGroup: n8n
     displayName: N8N
-
-  - image: schickling/mailcatcher
-    count: 1
-    cloudlets: 8
-    nodeGroup: mailcatcher
-    displayName: MailCatcher
-
 
 onInstall:
   - composer
