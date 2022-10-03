@@ -2,12 +2,12 @@
 
 Le projet Chef d'Oeuvre est un projet qui me permet d'experimenter toutes les technologies afin de faire de le veille.
 
-Ce projet repose sur un socle Symfony 5.4 et VueJs 3 et utilise docker pour toutes les briques exteners (elasticsearch, mysql, redis ...)
+Ce projet repose sur un socle Symfony 6.1 et VueJs 3 et utilise docker pour toutes les briques externes (elasticsearch, mysql, redis ...)
 
 Pour le front, j'utilise le framework css [bulma](https://bulma.io/).
 ### Technologies :
-- PHP 8
-- Symfony 5
+- PHP 8.1
+- Symfony 3.1
 - VueJs 3
 
 
@@ -55,7 +55,8 @@ TODO
 - [x] N8n  
 - [ ] Logs dans KIBANA
 - [ ] Charts JS
-
+- 
+  symfony open:local:rabbitmq
 
 #### Fonctionnalitées: 
 - [x] Afficher le contour d'une commune, d'un départements et du cadastre

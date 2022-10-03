@@ -14,7 +14,7 @@ class TestMessageController extends AbstractController
     #[Route('/test', name: '_test')]
     public function index(MessageBusInterface $bus): Response
     {
-        $this->dispatchMessage(new TestNotification('Look! I created a message!'));
+        $bus->dispatch(new TestNotification('Look! I created a message!'));
 
         return $this->render('messenger/index.html.twig', [
             'controller_name' => 'TestMessageController',

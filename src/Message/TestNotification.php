@@ -18,17 +18,13 @@ class TestNotification
         $this->test = $test;
     }
 
-
     public function getTest(): string
     {
         return $this->test;
     }
 
-
     public function setTest(string $test): void
     {
         $this->test = $test;
     }
-
-
 }
