@@ -1,14 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Message;
 
-/**
- * Class TestNotification
- * @package App\Message
- *
- * @author Sébastien Framinet <sebastien.framinet@asdoria.com>
- */
 class TestNotification
 {
     private string $test;

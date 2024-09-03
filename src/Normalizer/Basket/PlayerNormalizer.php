@@ -14,17 +14,8 @@ declare(strict_types=1);
 namespace App\Normalizer\Basket;
 
 use App\Entity\Basket\Player;
-use App\Repository\Basket\PlayerRepository;
 use App\Repository\Basket\TeamRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
-use Symfony\Component\Serializer\Exception\BadMethodCallException;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Exception\ExtraAttributesException;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
-use Symfony\Component\Serializer\Exception\LogicException;
-use Symfony\Component\Serializer\Exception\RuntimeException;
-use Symfony\Component\Serializer\Exception\UnexpectedValueException;
-use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -35,16 +26,16 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
     public function __construct(
         private ObjectNormalizer $normalizer,
         private TeamRepository $teamRepository
-    ) {}
+    ) {
+    }
 
-    public function normalize($player, string $format = null, array $context = [])
+    public function normalize($player, string $format = null, array $context = []): mixed
     {
         return $this->normalizer->normalize($player, $format, $context);
     }
 
-    public function supportsNormalization($data, string $format = null, array $context = [])
+    public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
-
         return $data instanceof Player;
     }
 
@@ -60,7 +51,7 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
         return $denormalized;
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
     {
         return class_exists($type) || (interface_exists($type, false));
     }

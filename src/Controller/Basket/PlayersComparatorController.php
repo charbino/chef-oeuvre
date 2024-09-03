@@ -29,7 +29,8 @@ class PlayersComparatorController extends AbstractController
         private BasketClient $client,
         private StatsPlayersProviderInterface $statsPlayersProvider,
         private GraphicsStatsPlayerProviderInterface $graphicsStatsPlayerProvider
-    ) {}
+    ) {
+    }
 
     #[Route('/index', name: '_index', options: ['expose' => true], methods: ['GET'])]
     public function index(Request $request): Response

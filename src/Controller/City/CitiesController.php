@@ -1,9 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller\City;
 
-use App\Client\CadastreClient;
 use App\Client\CityClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,16 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class CitiesController
- * @package App\Controller\City
- *
- * @author Sébastien Framinet <sebastien.framinet@asdoria.com>
- */
 #[Route(path: '/cities', name: 'cities')]
 class CitiesController extends AbstractController
 {
-
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -30,19 +23,15 @@ class CitiesController extends AbstractController
         return $this->render('city/cities.html.twig', []);
     }
 
-
     /**
      **
-     * @param Request $request
-     * @param CityClient $cityClient
      * @return JsonResponse
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     #[Route(path: '/city', name: '_search', options: ['expose' => true], methods: 'GET')]
     public function getCities(Request $request, CityClient $cityClient)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw new HttpException(403, "Forbidden");
+            throw new HttpException(403, 'Forbidden');
         }
 
         $query = $request->query->get('query');
@@ -59,17 +48,13 @@ class CitiesController extends AbstractController
     }
 
     /**
-     *
-     * @param Request $request
-     * @param CityClient $cityClient
      * @return JsonResponse
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     #[Route(path: '/departements', name: '_search_departments', options: ['expose' => true], methods: ['GET'])]
     public function getDepartments(Request $request, CityClient $cityClient)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw new HttpException(403, "Forbidden");
+            throw new HttpException(403, 'Forbidden');
         }
 
         $query = $request->query->get('query');
@@ -82,17 +67,15 @@ class CitiesController extends AbstractController
     }
 
     /**
-     *
-     * @param Request $request
-     * @param CityClient $cityClient
      * @return JsonResponse
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    #[Route(path: '/cities-informations', name: '_get_cities_informations_from_department', options: ['expose' => true], methods: ['GET'])]
+    #[Route(path: '/cities-informations', name: '_get_cities_informations_from_department', options: ['expose' => true], methods: [
+        'GET',
+    ])]
     public function getCitiesInformationsFromDepartment(Request $request, CityClient $cityClient)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw new HttpException(403, "Forbidden");
+            throw new HttpException(403, 'Forbidden');
         }
 
         $query = $request->query->get('query');
@@ -100,6 +83,4 @@ class CitiesController extends AbstractController
 
         return new JsonResponse(['cities' => $cities]);
     }
-
-
 }

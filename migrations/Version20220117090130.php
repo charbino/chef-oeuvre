@@ -21,7 +21,9 @@ final class Version20220117090130 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE upload ADD upload_by_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE upload ADD CONSTRAINT FK_17BDE61F83BA6D1B FOREIGN KEY (upload_by_id) REFERENCES user (id)');
+        $this->addSql(
+            'ALTER TABLE upload ADD CONSTRAINT FK_17BDE61F83BA6D1B FOREIGN KEY (upload_by_id) REFERENCES user (id)'
+        );
         $this->addSql('CREATE INDEX IDX_17BDE61F83BA6D1B ON upload (upload_by_id)');
     }
 

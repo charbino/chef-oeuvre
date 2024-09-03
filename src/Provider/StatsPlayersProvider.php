@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Provider;
 
 use App\Client\BasketClient;
-use App\Entity\Basket\Player;
 
 class StatsPlayersProvider implements StatsPlayersProviderInterface
 {
@@ -22,7 +21,8 @@ class StatsPlayersProvider implements StatsPlayersProviderInterface
 
     public function __construct(
         private BasketClient $client
-    ) {}
+    ) {
+    }
 
     public function provide(array $idPlayers, array $seasons): array
     {
@@ -35,12 +35,9 @@ class StatsPlayersProvider implements StatsPlayersProviderInterface
                 $stat = $this->client->getStatPlayers(
                     [$idPlayer],
                     ['per_page' => 100, 'page' => $page]
-//                    ['seasons' => $seasons, 'per_page' => 100, 'page' => $page]
+                    //                    ['seasons' => $seasons, 'per_page' => 100, 'page' => $page]
                 );
-                $statsPlayer = [
-                    ...$this->filterData($stat['data']),
-                    ...$statsPlayer
-                ];
+                $statsPlayer = [...$this->filterData($stat['data']), ...$statsPlayer];
 
                 $meta = $stat['meta'];
                 $page = $meta['next_cursor'] !== null ? $page = $meta['next_cursor'] : $page = null;
@@ -51,8 +48,7 @@ class StatsPlayersProvider implements StatsPlayersProviderInterface
             }
 
             //TODO ORDER BY DATE
-            usort($statsPlayer, function($gameA, $gameB){
-
+            usort($statsPlayer, function ($gameA, $gameB) {
                 return ($gameA['date'] < $gameB['date']) ? -1 : 1;
             });
             $stats[$idPlayer] = ['player' => $player, 'games' => $statsPlayer];
@@ -67,7 +63,7 @@ class StatsPlayersProvider implements StatsPlayersProviderInterface
         foreach ($data as $lineKey => $value) {
             $dataFiltered[$lineKey]['date'] = $value['game']['date'];
             foreach (self::DATA_FILTERED as $filterName) {
-                $dataFiltered[$lineKey][$filterName] =  $value[$filterName];
+                $dataFiltered[$lineKey][$filterName] = $value[$filterName];
             }
         }
 

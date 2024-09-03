@@ -1,22 +1,18 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * Class CommuneClient
- * @package App\Client
- */
 class CityClient extends Client
 {
-    public const URL = "https://geo.api.gouv.fr/";
+    public const URL = 'https://geo.api.gouv.fr/';
 
-    public const URL_COMMUNES = "communes";
-    public const URL_DEPARMENTS = "departements";
+    public const URL_COMMUNES = 'communes';
+    public const URL_DEPARMENTS = 'departements';
 
     public const PARAMETER_NAME = 'nom';
     public const PARAMETER_POSTCODE = 'codePostal';
@@ -28,10 +24,6 @@ class CityClient extends Client
     public const VALUE_GEOJSON = 'geojson';
     public const PARAMETER_CONTOUR = 'contour';
 
-
-    /**
-     * @param array $config
-     */
     public function __construct(array $config = [])
     {
         $config['base_uri'] = self::URL;
@@ -48,10 +40,7 @@ class CityClient extends Client
     }
 
     /**
-     * @param string $parameter
-     * @param string $value
      * @return mixed|null
-     * @throws GuzzleException
      */
     public function getDeparmentsBy(string $parameter, string $value)
     {
@@ -65,9 +54,7 @@ class CityClient extends Client
     }
 
     /**
-     * @param String $name
      * @return mixed| ResponseInterface
-     * @throws GuzzleException
      */
     public function getDepartmentByName(string $name)
     {
@@ -75,21 +62,15 @@ class CityClient extends Client
     }
 
     /**
-     * @param String $code
      * @return mixed| ResponseInterface
-     * @throws GuzzleException
      */
     public function getDepartmentByCode(string $code)
     {
         return $this->getDeparmentsBy(self::PARAMETER_CODE, $code);
     }
 
-
     /**
-     * @param string $parameter
-     * @param string $value
      * @return mixed|null
-     * @throws GuzzleException
      */
     public function getCitiesBy(array $parameters)
     {
@@ -103,9 +84,7 @@ class CityClient extends Client
     }
 
     /**
-     * @param String $name
      * @return mixed| ResponseInterface
-     * @throws GuzzleException
      */
     public function getCitiesByName(string $name)
     {
@@ -113,9 +92,7 @@ class CityClient extends Client
     }
 
     /**
-     * @param string $postCode
      * @return mixed|null
-     * @throws GuzzleException
      */
     public function getCitiesByCodePostal(string $postCode)
     {
@@ -123,9 +100,7 @@ class CityClient extends Client
     }
 
     /**
-     * @param string $departmentCode
      * @return mixed|null
-     * @throws GuzzleException
      */
     public function getCitiesByDepartmentCode(string $departmentCode)
     {
@@ -133,13 +108,11 @@ class CityClient extends Client
     }
 
     /**
-     * @param string $departmentCode
      * @return mixed|null
-     * @throws GuzzleException
      */
     public function getCitiesInformationsByDepartmentCode(string $departmentCode)
     {
-//        https://geo.api.gouv.fr/departements/73/communes?format=geojson&geometry=contour
+        //        https://geo.api.gouv.fr/departements/73/communes?format=geojson&geometry=contour
         return $this->getCitiesBy(
             [
                 self::PARAMETER_DEPARTMENT_CODE => $departmentCode,
@@ -148,6 +121,4 @@ class CityClient extends Client
             ]
         );
     }
-
-
 }
