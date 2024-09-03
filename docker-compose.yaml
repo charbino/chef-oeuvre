@@ -2,7 +2,6 @@
 
 # DEV docker compose file ——————————————————————————————————————————————————————
 # Check out: https://docs.docker.com/compose/gettingstarted/
-version: '3.7'
 
 # docker-compose -f docker-compose.yaml up -d
 services:
@@ -68,8 +67,8 @@ services:
         depends_on:
             - elasticsearch
 
-    rabbitmq:
-        container_name: rabbitmq
+    rabbitmq-chef-oeuvre:
+        container_name: rabbitmq-chef-oeuvre
         image: rabbitmq:3.7-management
         ports:
             - "5673:5672"
@@ -93,7 +92,7 @@ services:
             PORT: 9000
         command: -enable-url-source -mount /mnt/data
         ports:
-            - "9001:9000"
+            - "9009:9000"
 
     mailer:
         image: maildev/maildev

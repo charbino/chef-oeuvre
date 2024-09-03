@@ -22,7 +22,6 @@ class HomepageController extends AbstractController
     #[Route('/', name: '_index')]
     public function index(Request $request, SessionInterface $session): Response
     {
-
         return $this->render('homepage/homepage.html.twig');
     }
 }

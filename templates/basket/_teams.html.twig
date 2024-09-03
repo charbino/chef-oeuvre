@@ -1,0 +1,31 @@
+{{ dump() }}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th><abbr title="Abbrévation">Abbr</abbr></th>
+        <th>City</th>
+        <th>Conférence</th>
+        <th>Nom complet</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for team in teams %}
+        <tr>
+            <th>{{ team.externalId }}</th>
+            <td>{{ team.name }}</td>
+            <td>{{ team.abbreviation }}</td>
+            <td>{{ team.city }}</td>
+            <td>{{ team.conference }}</td>
+            <td>{{ team.fullName }}</td>
+            <td><button class="button is-primary">Voir les joueurs</button></td>
+            <td><button class="button is-primary">Voir les stats</button></td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>

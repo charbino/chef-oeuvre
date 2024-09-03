@@ -110,5 +110,49 @@ export default {
             limit: Infinity,
             rate: 0.45
         }
+    ]),
+    2023: new Bareme([
+        {
+            limit: 10777,
+            rate: 0.0
+        },
+        {
+            limit: 27478,
+            rate: 0.11
+        },
+        {
+            limit: 78570,
+            rate: 0.3
+        },
+        {
+            limit: 168994,
+            rate: 0.41
+        },
+        {
+            limit: Infinity,
+            rate: 0.45
+        }
+    ]),
+    2024: new Bareme([
+        {
+            limit: 11294,
+            rate: 0.0
+        },
+        {
+            limit: 28797,
+            rate: 0.11
+        },
+        {
+            limit: 82341,
+            rate: 0.3
+        },
+        {
+            limit: 177106,
+            rate: 0.41
+        },
+        {
+            limit: Infinity,
+            rate: 0.45
+        }
     ])
 };

@@ -7,7 +7,7 @@ Ce projet repose sur un socle Symfony 6.1 et VueJs 3 et utilise docker pour tout
 Pour le front, j'utilise le framework css [bulma](https://bulma.io/).
 ### Technologies :
 - PHP 8.1
-- Symfony 3.1
+- Symfony 6.2
 - VueJs 3
 
 
@@ -62,5 +62,9 @@ TODO
 - [x] Afficher le contour d'une commune, d'un départements et du cadastre
 
 
+#### Data
+- [Cadastre](https://api.gouv.fr/documentation/api_carto_cadastre)
+- [Public Apis](https://github.com/public-apis/public-apis)
+- [Basket](https://www.balldontlie.io/#get-all-players)
 
 

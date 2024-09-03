@@ -18,11 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/', name: 'impots')]
 class ImpotController extends AbstractController
 {
-
     #[Route('/impots', name: '_index')]
     public function impot(Request $request, SessionInterface $session): Response
     {
-
         return $this->render('impots/impots.html.twig');
     }
 }
