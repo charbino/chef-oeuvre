@@ -24,7 +24,6 @@ class CadastreController extends AbstractController
     #[Route(path: '/city-informations', name: '_get_city_informations', options: ['expose' => true], methods: ['GET'])]
     public function getCityInformations(Request $request, CadastreClient $cadastreClient)
     {
-
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException(403, "Forbidden");
         }

@@ -13,21 +13,20 @@ use Psr\Http\Message\ResponseInterface;
  */
 class CityClient extends Client
 {
-    const URL = "https://geo.api.gouv.fr/";
+    public const URL = "https://geo.api.gouv.fr/";
 
+    public const URL_COMMUNES = "communes";
+    public const URL_DEPARMENTS = "departements";
 
-    const URL_COMMUNES = "communes";
-    const URL_DEPARMENTS = "departements";
+    public const PARAMETER_NAME = 'nom';
+    public const PARAMETER_POSTCODE = 'codePostal';
+    public const PARAMETER_CODE = 'code';
+    public const PARAMETER_DEPARTMENT_CODE = 'codeDepartement';
+    public const PARAMETER_FORMAT = 'format';
+    public const PARAMETER_GEOMETRY = 'geometry';
 
-    const PARAMETER_NAME = 'nom';
-    const PARAMETER_POSTCODE = 'codePostal';
-    const PARAMETER_CODE = 'code';
-    const PARAMETER_DEPARTMENT_CODE = 'codeDepartement';
-    const PARAMETER_FORMAT = 'format';
-    const PARAMETER_GEOMETRY = 'geometry';
-
-    const VALUE_GEOJSON = 'geojson';
-    const PARAMETER_CONTOUR = 'contour';
+    public const VALUE_GEOJSON = 'geojson';
+    public const PARAMETER_CONTOUR = 'contour';
 
 
     /**
@@ -146,8 +145,8 @@ class CityClient extends Client
                 self::PARAMETER_DEPARTMENT_CODE => $departmentCode,
                 self::PARAMETER_FORMAT => self::VALUE_GEOJSON,
                 self::PARAMETER_GEOMETRY => self::PARAMETER_CONTOUR,
-            ]);
-
+            ]
+        );
     }
 
 

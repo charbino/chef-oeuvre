@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | Basket {% endblock %}
+
+{% block body %}
+    <h1 class="title is-1">Basket</h1>
+
+    <p class="block">
+        <a class="button is-primary" href="{{ path('basket_player_search') }}">Search</a>
+        <a class="button is-primary" href="{{ path('basket_players_comparator_index') }}">Comparer des Joueurs</a>
+    </p>
+
+    <div>
+        {% include 'basket/_teams.html.twig' with {teams} only %}
+    </div>
+
+{% endblock %}

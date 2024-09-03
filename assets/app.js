@@ -13,16 +13,15 @@ import { startStimulusApp } from '@symfony/stimulus-bridge';
 import Impots from "./js/components/impots/Impots";
 import Iss from "./js/components/iss/Iss";
 import City from './js/components/city/City'
+import Basket from './js/components/basket/Basket'
+import PlayersComparator from './js/components/basket/PlayersComparator'
 
 import * as mercure from './js/components/mercure'
 import formInit from './js/common/form'
 
 import Vue from "vue"
 import Buefy from 'buefy'
-// Vue.use(Buefy)
 Vue.use(Buefy, { defaultIconPack: 'fas' })
-
-
 
 formInit();
 mercure.init();
@@ -51,6 +50,24 @@ if (appCity) {
         el: '#app-city',
         components: {City},
         template: '<City/>'
+    });
+}
+
+const appBasket = document.getElementById('app-basket');
+if (appBasket) {
+    new Vue({
+        el: '#app-basket',
+        components: {Basket},
+        template: '<Basket/>'
+    });
+}
+
+const appPlayersComparator = document.getElementById('app-player-comparator');
+if (appPlayersComparator) {
+    new Vue({
+        el: '#app-player-comparator',
+        components: {PlayersComparator},
+        template: '<PlayersComparator/>'
     });
 }
 

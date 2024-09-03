@@ -14,21 +14,20 @@ use GuzzleHttp\Client;
  */
 class IssClient extends Client
 {
-    const URL = 'https://api.wheretheiss.at/v1/';
-    const URL_SATELLITE = 'satellites';
-    const URL_COORD = 'coordinates';
-
-    const LAT_FR_MIN = 41.340375;
-    const LAT_FR_MAX = 51.100000;
-    const LONG_FR_MIN = -5.10571;
-    const LONG_FR_MAX = 8.242677;
+    public const URL = 'https://api.wheretheiss.at/v1/';
+    public const URL_SATELLITE = 'satellites';
+    public const URL_COORD = 'coordinates';
+    public const LAT_FR_MIN = 41.340375;
+    public const LAT_FR_MAX = 51.100000;
+    public const LONG_FR_MIN = -5.10571;
+    public const LONG_FR_MAX = 8.242677;
 
     /**
      * @param array $config
      */
     public function __construct(array $config = [])
     {
-        return parent::__construct(array_merge($config, ['base_uri' => self::URL]));
+        parent::__construct(array_merge($config, ['base_uri' => self::URL]));
     }
 
     /**
