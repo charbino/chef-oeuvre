@@ -98,7 +98,7 @@ class BasketClient
     private function createQueryString(array $queryArray = []): ?string
     {
         $queryString = http_build_query($queryArray, '', '&', \PHP_QUERY_RFC3986);
-        $queryString = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '%5B%5D=', $queryString); //foo[]=x&foo[]=y
+        $queryString = preg_replace('/%5B(?:\d|[1-9]\d+)%5D=/', '%5B%5D=', $queryString); //foo[]=x&foo[]=y
 
         return $queryString !== '' ? $queryString : null;
     }
