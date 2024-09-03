@@ -14,6 +14,7 @@ use Symfony\Component\Mercure\Update;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 #[Route('/user/overkill', name: 'overkill')]
 class OverkillController extends AbstractController
 {
