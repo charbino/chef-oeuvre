@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method App\\\\Entity\\\\ParcelLocker\\|Zenstruck\\\\Foundry\\\\Proxy\\:\\:object\\(\\)\\.$#"
+			count: 1
+			path: tests/ParcelHandling/AvailableParcelLockerLocatorTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Entity\\\\ParcelUnit\\|Zenstruck\\\\Foundry\\\\Proxy\\:\\:object\\(\\)\\.$#"
+			count: 1
+			path: tests/ParcelHandling/AvailableParcelLockerLocatorTest.php
