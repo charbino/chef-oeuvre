@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-
 class UploadType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -20,10 +19,10 @@ class UploadType extends AbstractType
                 'allow_delete' => true,
                 'download_uri' => false,
                 'image_uri' => false,
-                'label' => "Download"
+                'label' => 'Download',
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Upload'
+                'label' => 'Upload',
             ]);
     }
 

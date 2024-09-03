@@ -18,12 +18,13 @@ class PlayerController extends AbstractController
     public function __construct(
         private EntityManagerInterface $entityManager,
         private SerializerInterface $serializer
-    ) {}
+    ) {
+    }
 
     #[Route('/add', name: '_add', options: ['expose' => true], methods: ['POST'])]
     public function add(Request $request): JsonResponse
     {
-        $player = $this->serializer->deserialize($request->getContent(), Player::class, 'json',['groups' => 'basket']);
+        $player = $this->serializer->deserialize($request->getContent(), Player::class, 'json', ['groups' => 'basket']);
         dump($player);
         dump($request->getContent());
         //TODO MAYBE USE VALIDATOR

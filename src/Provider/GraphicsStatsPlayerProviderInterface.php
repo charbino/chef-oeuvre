@@ -15,5 +15,4 @@ namespace App\Provider;
 
 interface GraphicsStatsPlayerProviderInterface
 {
-
 }

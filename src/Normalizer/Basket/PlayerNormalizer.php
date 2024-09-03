@@ -14,17 +14,8 @@ declare(strict_types=1);
 namespace App\Normalizer\Basket;
 
 use App\Entity\Basket\Player;
-use App\Repository\Basket\PlayerRepository;
 use App\Repository\Basket\TeamRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
-use Symfony\Component\Serializer\Exception\BadMethodCallException;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Exception\ExtraAttributesException;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
-use Symfony\Component\Serializer\Exception\LogicException;
-use Symfony\Component\Serializer\Exception\RuntimeException;
-use Symfony\Component\Serializer\Exception\UnexpectedValueException;
-use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -35,7 +26,8 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
     public function __construct(
         private ObjectNormalizer $normalizer,
         private TeamRepository $teamRepository
-    ) {}
+    ) {
+    }
 
     public function normalize($player, string $format = null, array $context = [])
     {
@@ -44,7 +36,6 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
 
     public function supportsNormalization($data, string $format = null, array $context = [])
     {
-
         return $data instanceof Player;
     }
 

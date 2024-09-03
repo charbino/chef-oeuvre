@@ -15,19 +15,14 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 #[Route('/user/overkill', name: 'overkill')]
 class OverkillController extends AbstractController
 {
-
     private EntityManagerInterface $em;
 
-    /**
-     * @param EntityManagerInterface $em
-     */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
@@ -36,7 +31,6 @@ class OverkillController extends AbstractController
     #[Route('/', name: '_index')]
     public function index(Request $request, MessageBusInterface $messageBus, HubInterface $hub): Response
     {
-
         $upload = new Upload();
         $form = $this->createForm(UploadType::class, $upload);
 
@@ -57,20 +51,14 @@ class OverkillController extends AbstractController
         ]);
     }
 
-    /**
-     * @param HubInterface $hub
-     * @param UserInterface $user
-     * @return void
-     */
     private function sendMercure(HubInterface $hub, UserInterface $user)
     {
+        //        $encoders = [new JsonEncoder()];
+        //        $normalizers = [new ObjectNormalizer()];
+        //
+        //        $serializer = new Serializer($normalizers, $encoders);
 
-//        $encoders = [new JsonEncoder()];
-//        $normalizers = [new ObjectNormalizer()];
-//
-//        $serializer = new Serializer($normalizers, $encoders);
-
-        $update = new Update('overkill_send',json_encode(['id'=>$user->getUserIdentifier()]));
+        $update = new Update('overkill_send', json_encode(['id' => $user->getUserIdentifier()]));
         $hub->publish($update);
     }
 }

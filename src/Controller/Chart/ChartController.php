@@ -12,8 +12,8 @@ use Symfony\UX\Chartjs\Model\Chart;
 class ChartController extends AbstractController
 {
     #[Route('', name: '_index')]
-    public function index(ChartBuilderInterface $chartBuilder): Response    {
-
+    public function index(ChartBuilderInterface $chartBuilder): Response
+    {
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
 
         $chart->setData([

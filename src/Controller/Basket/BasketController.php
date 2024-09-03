@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Basket;
 
-use App\Client\BasketClient;
 use App\Repository\Basket\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,13 +23,14 @@ class BasketController extends AbstractController
 {
     public function __construct(
         private TeamRepository $teamRepository
-    ) {}
+    ) {
+    }
 
     #[Route('/index', name: '_index')]
     public function index(): Response
     {
         return $this->render('basket/index.html.twig', [
-            'teams' => $this->teamRepository->findAll()
+            'teams' => $this->teamRepository->findAll(),
         ]);
     }
 }

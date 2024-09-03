@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Controller\Basket;
 
 use App\Repository\Basket\PlayerRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +28,8 @@ class PlayersController extends AbstractController
 {
     public function __construct(
         private PlayerRepository $repository
-    ) {}
+    ) {
+    }
 
     #[Route('/get', name: '_get', options: ['expose' => true], methods: ['GET'])]
     public function get(Request $request): JsonResponse
@@ -40,7 +40,7 @@ class PlayersController extends AbstractController
         dump($players);
 
         return new JsonResponse($serializer->serialize($players, 'json', [
-            AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => true
+            AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => true,
         ]), json: true);
     }
 }

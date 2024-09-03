@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller\Impot;
@@ -9,12 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class ImpotController
- * @package App\Controller\Impot
- *
- * @author Sébastien Framinet <sebastien.framinet@asdoria.com>
- */
 #[Route(path: '/', name: 'impots')]
 class ImpotController extends AbstractController
 {

@@ -13,8 +13,7 @@ class PlayerBasketTransformer implements PlayerBasketTransformerInterface
 {
     public function __construct(
         private TeamRepository $repository
-    )
-    {
+    ) {
     }
 
     public function transform(array $data): Player
@@ -28,11 +27,13 @@ class PlayerBasketTransformer implements PlayerBasketTransformerInterface
         $player->setDraftNumber($data['draft_number']);
 
         if (isset($data['height'])) {
-            $heigthData = explode("-", $data['height']);
-            $player->setHeight(SizeConverter::inchToCentimeter((int)($heigthData[0] ?? 0), (int)($heigthData[1] ?? 0)));
+            $heigthData = explode('-', $data['height']);
+            $player->setHeight(
+                SizeConverter::inchToCentimeter((int) ($heigthData[0] ?? 0), (int) ($heigthData[1] ?? 0))
+            );
         }
         if (isset($data['weight'])) {
-            $player->setWeight(SizeConverter::poundToKilo((float)$data['weight']));
+            $player->setWeight(SizeConverter::poundToKilo((float) $data['weight']));
         }
 
         $player->setTeam($this->getTeam($data['team']));

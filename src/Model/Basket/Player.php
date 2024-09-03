@@ -15,5 +15,4 @@ namespace App\Model\Basket;
 
 class Player
 {
-
 }

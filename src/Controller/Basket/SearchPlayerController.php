@@ -22,7 +22,8 @@ class SearchPlayerController extends AbstractController
     public function __construct(
         private BasketClient $client,
         private PlayerBasketTransformerInterface $transformer
-    ) {}
+    ) {
+    }
 
     #[Route('/index', name: '_search', options: ['expose' => true], methods: ['GET'])]
     public function index(Request $request): Response
@@ -42,8 +43,8 @@ class SearchPlayerController extends AbstractController
 
         $serializer = new Serializer([new GetSetMethodNormalizer()], ['json' => new JsonEncoder()]);
 
-        return new JsonResponse($serializer->serialize(['players' => $players ?? []], 'json',[
-            AbstractObjectNormalizer::SKIP_NULL_VALUES => true
-        ]),json: true);
+        return new JsonResponse($serializer->serialize(['players' => $players ?? []], 'json', [
+            AbstractObjectNormalizer::SKIP_NULL_VALUES => true,
+        ]), json: true);
     }
 }

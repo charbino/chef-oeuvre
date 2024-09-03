@@ -14,28 +14,24 @@ declare(strict_types=1);
 namespace App\Controller\Basket;
 
 use App\Client\BasketClient;
-use App\Transformer\Basket\PlayerBasketTransformerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 #[Route(path: '/basket/stat-player', name: 'basket_stat_player')]
 class StatPlayerController extends AbstractController
 {
     public function __construct(
         private BasketClient $client,
-    ) {}
+    ) {
+    }
 
     #[Route('/index/{id}', name: '_index', options: ['expose' => true], methods: ['GET'])]
     public function index(Request $request): Response
     {
-        $id = (int)$request->attributes->get('id');
+        $id = (int) $request->attributes->get('id');
 
         $stats = $this->client->getStatPlayer($id);
         dump($stats);

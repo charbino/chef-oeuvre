@@ -1,28 +1,19 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client;
 
 use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
 
-/**
- * Class CadastreClient
- * @package App\Client
- *
- * @author Sébastien Framinet <sebastien.framinet@asdoria.com>
- */
 class CadastreClient extends Client
 {
-    const URL = "https://apicarto.ign.fr/api/cadastre/";
-    const URL_COMMUNE = "commune";
-    const URL_DIVISION = "division";
-    const URL_PARCELLE = "parcelle";
-    const CODE_INSEE = "code_insee";
+    public const URL = 'https://apicarto.ign.fr/api/cadastre/';
+    public const URL_COMMUNE = 'commune';
+    public const URL_DIVISION = 'division';
+    public const URL_PARCELLE = 'parcelle';
+    public const CODE_INSEE = 'code_insee';
 
-    /**
-     * @param array $config
-     */
     public function __construct(array $config = [])
     {
         $config['base_uri'] = self::URL;
@@ -31,9 +22,7 @@ class CadastreClient extends Client
     }
 
     /**
-     * @param string $codeInsee
      * @return mixed|null
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getCity(string $codeInsee)
     {
@@ -47,9 +36,7 @@ class CadastreClient extends Client
     }
 
     /**
-     * @param string $codeInsee
      * @return mixed|null
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getPlots(object $city)
     {
@@ -61,10 +48,9 @@ class CadastreClient extends Client
 
         return json_decode($result->getBody()->getContents());
     }
+
     /**
-     * @param string $codeInsee
      * @return mixed|null
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getParcelles(object $city)
     {
