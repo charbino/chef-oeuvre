@@ -14,10 +14,6 @@ use Symfony\Component\Mercure\Update;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-
 #[Route('/user/overkill', name: 'overkill')]
 class OverkillController extends AbstractController
 {
@@ -47,7 +43,7 @@ class OverkillController extends AbstractController
         }
 
         return $this->render('overkill/index.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 

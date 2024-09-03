@@ -29,12 +29,12 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
     ) {
     }
 
-    public function normalize($player, string $format = null, array $context = [])
+    public function normalize($player, string $format = null, array $context = []): mixed
     {
         return $this->normalizer->normalize($player, $format, $context);
     }
 
-    public function supportsNormalization($data, string $format = null, array $context = [])
+    public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
         return $data instanceof Player;
     }
@@ -51,7 +51,7 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
         return $denormalized;
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
     {
         return class_exists($type) || (interface_exists($type, false));
     }

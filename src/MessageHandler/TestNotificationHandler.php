@@ -7,7 +7,8 @@ namespace App\MessageHandler;
 use App\Message\TestNotification;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class TestNotificationHandler implements MessageHandlerInterface
+#[\Symfony\Component\Messenger\Attribute\AsMessageHandler]
+class TestNotificationHandler
 {
     public function __invoke(TestNotification $message)
     {

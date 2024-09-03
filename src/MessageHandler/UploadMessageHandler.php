@@ -7,7 +7,8 @@ namespace App\MessageHandler;
 use App\Message\UploadMessage;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class UploadMessageHandler implements MessageHandlerInterface
+#[\Symfony\Component\Messenger\Attribute\AsMessageHandler]
+class UploadMessageHandler
 {
     public function __invoke(UploadMessage $uploadMessage)
     {
