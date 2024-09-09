@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Client;
 
-use GuzzleHttp\Client;
+use App\Model\City\City;
+use App\Transformer\City\CitiesTransformer;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class CadastreClient extends Client
+class CadastreClient
 {
     public const URL = 'https://apicarto.ign.fr/api/cadastre/';
     public const URL_COMMUNE = 'commune';
@@ -14,52 +16,39 @@ class CadastreClient extends Client
     public const URL_PARCELLE = 'parcelle';
     public const CODE_INSEE = 'code_insee';
 
-    public function __construct(array $config = [])
-    {
-        $config['base_uri'] = self::URL;
-
-        parent::__construct($config);
+    public function __construct(
+        private HttpClientInterface $client,
+        private CitiesTransformer $citiesTransformer
+    ) {
     }
 
-    /**
-     * @return mixed|null
-     */
-    public function getCity(string $codeInsee)
+    public function getCity(string $codeInsee): ?City
     {
         $url = self::URL . self::URL_COMMUNE;
-        $result = $this->request('GET', $url, ['query' => [self::CODE_INSEE => $codeInsee]]);
-        if ($result->getStatusCode() != 200) {
+        $response = $this->client->request('GET', $url, ['query' => [self::CODE_INSEE => $codeInsee]]);
+
+        if ($response->getStatusCode() !== 200) {
             return null;
         }
 
-        return json_decode($result->getBody()->getContents());
+        $cities = $this->citiesTransformer->transform($response->toArray()['features'] ?? []);
+
+        return $cities[0] ?? null;
     }
 
-    /**
-     * @return mixed|null
-     */
-    public function getPlots(object $city)
+    public function getPlots(City $city): ?array
     {
         $url = self::URL . self::URL_DIVISION;
-        $result = $this->request('GET', $url, ['query' => [self::CODE_INSEE => $city->properties->code_insee]]);
-        if ($result->getStatusCode() != 200) {
-            return null;
-        }
+        $response = $this->client->request('GET', $url, ['query' => [self::CODE_INSEE => $city->getCodeInsee()]]);
 
-        return json_decode($result->getBody()->getContents());
+        return $response->getStatusCode() === 200 ? $response->toArray() : null;
     }
 
-    /**
-     * @return mixed|null
-     */
-    public function getParcelles(object $city)
+    public function getParcelles(City $city): ?array
     {
         $url = self::URL . self::URL_PARCELLE;
-        $result = $this->request('GET', $url, ['query' => [self::CODE_INSEE => $city->properties->code_insee]]);
-        if ($result->getStatusCode() != 200) {
-            return null;
-        }
+        $response = $this->client->request('GET', $url, ['query' => [self::CODE_INSEE => $city->getCodeInsee()]]);
 
-        return json_decode($result->getBody()->getContents());
+        return $response->getStatusCode() === 200 ? $response->toArray() : null;
     }
 }

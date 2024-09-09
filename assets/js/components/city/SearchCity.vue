@@ -31,12 +31,11 @@
             <span class="title is-5"> Communes </span>
             <ul>
                 <li v-for="(city,index) in citiesSelected" :key="index">
-                        <span class="icon-text">
-                            <span>{{ city.properties.code_insee }} - {{ city.properties.nom_com }}</span>
-                               <span class="icon" @click="center(city)"><i class="fas fa-crosshairs"></i></span>
-                            <span class="icon" @click="removeCity(city)"> <i class="fas fa-times"></i></span>
-
-                        </span>
+                    <span class="icon-text">
+                        <span>{{ city.properties.codeInsee }} - {{ city.properties.nomCom }}</span>
+                           <span class="icon" @click="center(city)"><i class="fas fa-crosshairs"></i></span>
+                        <span class="icon" @click="removeCity(city)"> <i class="fas fa-times"></i></span>
+                    </span>
                 </li>
             </ul>
         </div>
@@ -98,7 +97,7 @@ export default {
             this.$root.$emit(EVENT_NAME.CENTER_CITY, city)
         },
         removeCity(city) {
-            this.citiesSelected = this.citiesSelected.filter(c => c.properties.code_insee !== city.properties.code_insee);
+            this.citiesSelected = this.citiesSelected.filter(c => c.properties.codeInsee !== city.properties.codeInsee);
             this.$root.$emit(EVENT_NAME.REMOVE_CITY, city)
         }
     }

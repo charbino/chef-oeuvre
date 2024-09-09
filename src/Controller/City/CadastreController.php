@@ -15,21 +15,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class CadastreController extends AbstractController
 {
     #[Route(path: '/city-informations', name: '_get_city_informations', options: ['expose' => true], methods: ['GET'])]
-    public function getCityInformations(Request $request, CadastreClient $cadastreClient)
+    public function getCityInformation(Request $request, CadastreClient $cadastreClient): JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException(403, 'Forbidden');
         }
 
         $query = $request->query->get('query');
-        $city = $cadastreClient->getCity($query);
-        $plots = null;
-        $parcelles = null;
-        if (!empty($city)) {
-            $plots = $cadastreClient->getPlots($city->features[0]);
-            $parcelles = $cadastreClient->getParcelles($city->features[0]);
+        $city = $cadastreClient->getCity($query ?? '');
+
+        if ($city === null) {
+            return new JsonResponse(['error' => 'City not found'], 404);
         }
 
-        return new JsonResponse(['city' => $city->features[0], 'plots' => $plots, 'parcelles' => $parcelles]);
+        return new JsonResponse([
+            'city' => $city,
+            'plots' => $cadastreClient->getPlots($city),
+            'parcelles' => $cadastreClient->getParcelles($city),
+        ]);
     }
 }

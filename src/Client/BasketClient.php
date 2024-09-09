@@ -46,7 +46,7 @@ class BasketClient
         if ($response->getStatusCode() !== 200) {
             return [];
         }
-        dump($response->toArray());
+
         return $response->toArray()['data'];
     }
 
