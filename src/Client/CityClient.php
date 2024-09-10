@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Client;
 
-use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class CityClient extends Client
+class CityClient
 {
     public const URL = 'https://geo.api.gouv.fr/';
 
@@ -24,11 +23,13 @@ class CityClient extends Client
     public const VALUE_GEOJSON = 'geojson';
     public const PARAMETER_CONTOUR = 'contour';
 
-    public function __construct(array $config = [])
+    public function __construct(
+        private HttpClientInterface $client,
+    )
     {
-        $config['base_uri'] = self::URL;
-
-        parent::__construct($config);
+        $this->client = $this->client->withOptions([
+            'base_uri' => self::URL,
+        ]);
     }
 
     /**
@@ -40,77 +41,86 @@ class CityClient extends Client
     }
 
     /**
-     * @return mixed|null
+     * @param string $parameter
+     * @param string $value
+     * @return array<mixed>
      */
-    public function getDeparmentsBy(string $parameter, string $value)
+    public function getDeparmentsBy(string $parameter, string $value): array
     {
         $queryParam = array_merge([$parameter => $value], $this->getFields());
-        $result = $this->request('GET', self::URL_DEPARMENTS, ['query' => $queryParam]);
-        if ($result->getStatusCode() != 200) {
-            return null;
+        $response = $this->client->request('GET', self::URL_DEPARMENTS, ['query' => $queryParam]);
+        if ($response->getStatusCode() !== 200) {
+            return [];
         }
 
-        return json_decode($result->getBody()->getContents());
+        return $response->toArray();
     }
 
     /**
-     * @return mixed| ResponseInterface
+     * @param string $name
+     * @return array<mixed>
      */
-    public function getDepartmentByName(string $name)
+    public function getDepartmentByName(string $name): array
     {
         return $this->getDeparmentsBy(self::PARAMETER_NAME, $name);
     }
 
     /**
-     * @return mixed| ResponseInterface
+     * @param string $code
+     * @return mixed[]
      */
-    public function getDepartmentByCode(string $code)
+    public function getDepartmentByCode(string $code): array
     {
         return $this->getDeparmentsBy(self::PARAMETER_CODE, $code);
     }
 
     /**
-     * @return mixed|null
+     * @param array<string, string> $parameters
+     * @return array<mixed>
      */
-    public function getCitiesBy(array $parameters)
+    public function getCitiesBy(array $parameters): array
     {
         $queryParam = array_merge($parameters, $this->getFields());
-        $result = $this->request('GET', self::URL_COMMUNES, ['query' => $queryParam]);
-        if ($result->getStatusCode() != 200) {
-            return null;
+        $response = $this->client->request('GET', self::URL_COMMUNES, ['query' => $queryParam]);
+        if ($response->getStatusCode() !== 200) {
+            return [];
         }
 
-        return json_decode($result->getBody()->getContents());
+        return $response->toArray();
     }
 
     /**
-     * @return mixed| ResponseInterface
+     * @param string $name
+     * @return array<mixed>
      */
-    public function getCitiesByName(string $name)
+    public function getCitiesByName(string $name): array
     {
         return $this->getCitiesBy([self::PARAMETER_NAME => $name]);
     }
 
     /**
-     * @return mixed|null
+     * @param string $postCode
+     * @return array<mixed>
      */
-    public function getCitiesByCodePostal(string $postCode)
+    public function getCitiesByCodePostal(string $postCode): array
     {
         return $this->getCitiesBy([self::PARAMETER_POSTCODE => $postCode]);
     }
 
     /**
-     * @return mixed|null
+     * @param string $departmentCode
+     * @return array<mixed>
      */
-    public function getCitiesByDepartmentCode(string $departmentCode)
+    public function getCitiesByDepartmentCode(string $departmentCode): array
     {
         return $this->getCitiesBy([self::PARAMETER_DEPARTMENT_CODE => $departmentCode]);
     }
 
     /**
-     * @return mixed|null
+     * @param string $departmentCode
+     * @return array<mixed>
      */
-    public function getCitiesInformationsByDepartmentCode(string $departmentCode)
+    public function getCitiesInformationsByDepartmentCode(string $departmentCode): array
     {
         //        https://geo.api.gouv.fr/departements/73/communes?format=geojson&geometry=contour
         return $this->getCitiesBy(

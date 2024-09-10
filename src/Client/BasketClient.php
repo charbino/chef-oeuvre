@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace App\Client;
 
+use Psr\Http\Client\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class BasketClient
@@ -25,7 +29,13 @@ class BasketClient
     ) {
     }
 
-    public function getPlayers(string $search, int $page = 0, int $perPage = 25)
+    /**
+     * @param string $search
+     * @param int $page
+     * @param int $perPage
+     * @return array<mixed>
+     */
+    public function getPlayers(string $search, int $page = 0, int $perPage = 25): array
     {
         $response = $this->client->request(
             'GET',
@@ -50,15 +60,18 @@ class BasketClient
         return $response->toArray()['data'];
     }
 
-    public function getStatPlayer(int $id, array $filters = [])
+    /**
+     * @param int $id
+     * @return array<mixed>
+     */
+    public function getStatPlayer(int $id): array
     {
         $response = $this->client->request(
             'GET',
             self::URL . 'stats',
             [
                 'query' => [
-                    'player_ids' => [$id],
-                    ...$filters,
+                    'player_ids' => [$id]
                 ],
                 'headers' => [
                     'Authorization' => self::API_KEY,
@@ -73,14 +86,16 @@ class BasketClient
         return $response->toArray();
     }
 
+    /**
+     * @param array<int> $ids
+     * @param array<string,string> $filters
+     * @return array<mixed>
+     */
     public function getStatPlayers(array $ids, array $filters = []): array
     {
         //use this function for not have index in query string parameter
         //see : https://stackoverflow.com/questions/60440737/symfony-httpclient-get-request-with-multiple-query-string-parameters-with-same-n
-        $url = self::URL . 'stats?' . $this->createQueryString([
-            'player_ids' => array_values($ids),
-            ...$filters,
-        ]);
+        $url = self::URL . 'stats?' . $this->createQueryString(array_merge(array_values($ids), $filters));
 
         $response = $this->client->request('GET', $url, [
             'headers' => [
@@ -95,6 +110,10 @@ class BasketClient
         return $response->toArray();
     }
 
+    /**
+     * @param array<string> $queryArray
+     * @return string|null
+     */
     private function createQueryString(array $queryArray = []): ?string
     {
         $queryString = http_build_query($queryArray, '', '&', \PHP_QUERY_RFC3986);

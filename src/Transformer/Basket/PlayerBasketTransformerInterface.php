@@ -17,5 +17,9 @@ use App\Entity\Basket\Player;
 
 interface PlayerBasketTransformerInterface
 {
+    /**
+     * @param array<mixed> $data
+     * @return Player
+     */
     public function transform(array $data): Player;
 }

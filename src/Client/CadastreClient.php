@@ -36,6 +36,10 @@ class CadastreClient
         return $cities[0] ?? null;
     }
 
+    /**
+     * @param City $city
+     * @return array<mixed>|null
+     */
     public function getPlots(City $city): ?array
     {
         $url = self::URL . self::URL_DIVISION;
@@ -44,6 +48,10 @@ class CadastreClient
         return $response->getStatusCode() === 200 ? $response->toArray() : null;
     }
 
+    /**
+     * @param City $city
+     * @return array<mixed>|null
+     */
     public function getParcelles(City $city): ?array
     {
         $url = self::URL . self::URL_PARCELLE;

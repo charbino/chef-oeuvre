@@ -34,6 +34,12 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
         return $this->normalizer->normalize($player, $format, $context);
     }
 
+    /**
+     * @param $data
+     * @param string|null $format
+     * @param array<string> $context
+     * @return bool
+     */
     public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
         return $data instanceof Player;

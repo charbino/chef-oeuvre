@@ -22,20 +22,21 @@ class SearchPlayerController extends AbstractController
     public function __construct(
         private BasketClient $client,
         private PlayerBasketTransformerInterface $transformer
-    ) {
+    )
+    {
     }
 
     #[Route('/index', name: '_search', options: ['expose' => true], methods: ['GET'])]
     public function index(Request $request): Response
     {
         $query = $request->query->get('query', '');
-        $limit = $request->query->get('limit', 25);
+        $limit = $request->query->get('limit', '25');
 
         if (!$request->isXmlHttpRequest()) {
             return $this->render('basket/search/search.html.twig', ['query' => $query]);
         }
 
-        $playersApi = $this->client->getPlayers($query, 0, $limit);
+        $playersApi = $this->client->getPlayers($query, 0, (int) $limit);
         $players = [];
         foreach ($playersApi as $playerData) {
             $players[] = $this->transformer->transform($playerData);
@@ -43,8 +44,9 @@ class SearchPlayerController extends AbstractController
 
         $serializer = new Serializer([new GetSetMethodNormalizer()], ['json' => new JsonEncoder()]);
 
-        return new JsonResponse($serializer->serialize(['players' => $players ?? []], 'json', [
-            AbstractObjectNormalizer::SKIP_NULL_VALUES => true,
-        ]), json: true);
+        return new JsonResponse(
+            $serializer->serialize(['players' => $players], 'json', [
+                AbstractObjectNormalizer::SKIP_NULL_VALUES => true,
+            ]), json: true);
     }
 }

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Basket;
 
-use App\Client\BasketClient;
 use App\Provider\GraphicsStatsPlayerProviderInterface;
 use App\Provider\StatsPlayersProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,10 +25,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlayersComparatorController extends AbstractController
 {
     public function __construct(
-        private BasketClient $client,
         private StatsPlayersProviderInterface $statsPlayersProvider,
         private GraphicsStatsPlayerProviderInterface $graphicsStatsPlayerProvider
-    ) {
+    )
+    {
     }
 
     #[Route('/index', name: '_index', options: ['expose' => true], methods: ['GET'])]
@@ -49,11 +48,12 @@ class PlayersComparatorController extends AbstractController
         }
 
         $stats = $this->statsPlayersProvider->provide($idPlayers, $seasons);
-        dump($stats);
+        if ($stats === []) {
+            return new JsonResponse([]);
+        }
 
-        $graphic = $this->graphicsStatsPlayerProvider->provide($stats);
-        dump($graphic);
-
-        return new JsonResponse(['graphic' => $graphic]);
+        return new JsonResponse([
+            'graphic' => $this->graphicsStatsPlayerProvider->provide($stats)
+        ]);
     }
 }

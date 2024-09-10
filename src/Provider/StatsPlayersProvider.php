@@ -24,6 +24,11 @@ class StatsPlayersProvider implements StatsPlayersProviderInterface
     ) {
     }
 
+    /**
+     * @param array<int> $idPlayers
+     * @param array<string> $seasons
+     * @return array|mixed[]
+     */
     public function provide(array $idPlayers, array $seasons): array
     {
         $stats = [];
@@ -56,6 +61,10 @@ class StatsPlayersProvider implements StatsPlayersProviderInterface
         return $stats;
     }
 
+    /**
+     * @param array<mixed> $data
+     * @return array<mixed>
+     */
     private function filterData(array $data): array
     {
         $dataFiltered = [];

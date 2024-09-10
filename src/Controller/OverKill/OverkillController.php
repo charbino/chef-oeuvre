@@ -48,14 +48,20 @@ class OverkillController extends AbstractController
         ]);
     }
 
-    private function sendMercure(HubInterface $hub, UserInterface $user)
+    /**
+     * @throws \JsonException
+     */
+    private function sendMercure(HubInterface $hub, UserInterface $user): void
     {
         //        $encoders = [new JsonEncoder()];
         //        $normalizers = [new ObjectNormalizer()];
         //
         //        $serializer = new Serializer($normalizers, $encoders);
 
-        $update = new Update('overkill_send', json_encode(['id' => $user->getUserIdentifier()]));
+        $update = new Update(
+            'overkill_send',
+            json_encode(['id' => $user->getUserIdentifier()], JSON_THROW_ON_ERROR)
+        );
         $hub->publish($update);
     }
 }

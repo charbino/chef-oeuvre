@@ -15,4 +15,9 @@ namespace App\Provider;
 
 interface GraphicsStatsPlayerProviderInterface
 {
+    /**
+     * @param array<mixed> $stats
+     * @return array<mixed>
+     */
+    public function provide(array $stats): array;
 }

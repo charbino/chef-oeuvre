@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Client;
 
 use DateTime;
-use GuzzleHttp\Client;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class IssClient extends Client
+class IssClient
 {
     public const URL = 'https://api.wheretheiss.at/v1/';
     public const URL_SATELLITE = 'satellites';
@@ -17,63 +17,65 @@ class IssClient extends Client
     public const LONG_FR_MIN = -5.10571;
     public const LONG_FR_MAX = 8.242677;
 
-    public function __construct(array $config = [])
+    public function __construct(
+        private HttpClientInterface $client,
+    )
     {
-        parent::__construct(array_merge($config, ['base_uri' => self::URL]));
+        $this->client = $this->client->withOptions([
+            'base_uri' => self::URL,
+        ]);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getCurrentPosition(): array
     {
-        $idSattelite = $this->getSatelliteId();
-        $dataSattelite = $this->getDataSatellite($idSattelite);
+        $idSatelite = $this->getSatelliteId();
+        $sateliteData = $this->getDataSatellite($idSatelite);
 
         $dateNow = new DateTime();
         return [
-            'latitude' => $dataSattelite->latitude,
-            'longitude' => $dataSattelite->longitude,
-            'speed' => $dataSattelite->velocity,
-            'units' => $dataSattelite->units,
-            'dateTime' => date('d-m-Y H:i', $dataSattelite->timestamp),
-            'visibility' => $dataSattelite->visibility,
-            'altitude' => $dataSattelite->altitude,
+            'latitude' => $sateliteData['latitude'],
+            'longitude' => $sateliteData['longitude'],
+            'speed' => $sateliteData['velocity'],
+            'units' => $sateliteData['units'],
+            'dateTime' => date('d-m-Y H:i', $sateliteData['timestamp']),
+            'visibility' => $sateliteData['visibility'],
+            'altitude' => $sateliteData['altitude'],
             'now' => $dateNow->format('d-m-Y H:i'),
         ];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSatelliteId()
+    public function getSatelliteId(): ?int
     {
-        $options = [
-            'header' =>
+        $response = $this->client->request('GET', self::URL_SATELLITE, [
+            'headers' =>
                 [
                     'Accept' => 'application/json',
                     'Access-Control-Allow-Origin' => '*',
                 ],
-        ];
+        ]);
 
-        $reponse = $this->request('GET', self::URL_SATELLITE, $options);
-        $responseArray = json_decode((string) $reponse->getBody());
-
-        return $responseArray[0]->id;
+        return $response->toArray()[0]['id'] ?? null;
     }
 
     /**
-     * @return mixed
+     * @param int $idSattelite
+     * @return array<mixed>
      */
-    public function getDataSatellite($idSattelite)
+    public function getDataSatellite(int $idSattelite): array
     {
-        $url = self::URL_SATELLITE . '/' . $idSattelite;
-        $options = [
-            'header' =>
-                [
-                    'Accept' => 'application/json',
-                ],
-        ];
+        $response = $this->client->request(
+            'GET',
+            self::URL_SATELLITE . '/' . $idSattelite,
+            [
+                'headers' =>
+                    [
+                        'Accept' => 'application/json',
+                    ],
+            ]);
 
-        $reponse = $this->request('GET', $url, $options);
-
-        return json_decode((string) $reponse->getBody());
+        return $response->toArray();
     }
 }

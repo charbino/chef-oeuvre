@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UploadRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UploadRepository::class)]
@@ -14,16 +15,22 @@ class Upload
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $imageName;
+    private ?string $imageName;
 
     #[Vich\UploadableField(mapping: 'upload', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'uploads')]
-    private $uploadBy;
+    private ?UserInterface $uploadBy;
+
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
 
     public function getId(): ?int
     {
@@ -52,12 +59,12 @@ class Upload
         return $this->imageFile;
     }
 
-    public function getUploadBy(): ?User
+    public function getUploadBy(): ?UserInterface
     {
         return $this->uploadBy;
     }
 
-    public function setUploadBy(?User $uploadBy): self
+    public function setUploadBy(?UserInterface $uploadBy): self
     {
         $this->uploadBy = $uploadBy;
 

@@ -19,6 +19,8 @@ use App\Model\City\CityProperties;
 class CitiesTransformer
 {
     /**
+     * @param array<string,mixed> $data
+     *
      * @return City[]
      */
     public function transform(array $data): array
