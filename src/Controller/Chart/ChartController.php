@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
-#[Route('/chart', name: 'chart')]
+#[\Symfony\Component\Routing\Attribute\Route('/chart', name: 'chart')]
 class ChartController extends AbstractController
 {
-    #[Route('', name: '_index')]
+    #[\Symfony\Component\Routing\Attribute\Route('', name: '_index')]
     public function index(ChartBuilderInterface $chartBuilder): Response
     {
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);

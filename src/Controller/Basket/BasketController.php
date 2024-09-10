@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/basket', name: 'basket')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/basket', name: 'basket')]
 class BasketController extends AbstractController
 {
     public function __construct(
@@ -26,7 +26,7 @@ class BasketController extends AbstractController
     ) {
     }
 
-    #[Route('/index', name: '_index')]
+    #[\Symfony\Component\Routing\Attribute\Route('/index', name: '_index')]
     public function index(): Response
     {
         return $this->render('basket/index.html.twig', [

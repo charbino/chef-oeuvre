@@ -8,10 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/messenger', name: 'messenger')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/messenger', name: 'messenger')]
 class TestMessageController extends AbstractController
 {
-    #[Route('/test', name: '_test')]
+    #[\Symfony\Component\Routing\Attribute\Route('/test', name: '_test')]
     public function index(MessageBusInterface $bus): Response
     {
         $bus->dispatch(new TestNotification('Look! I created a message!'));

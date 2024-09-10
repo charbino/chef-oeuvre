@@ -6,10 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/user', name: 'user')]
+#[\Symfony\Component\Routing\Attribute\Route('/user', name: 'user')]
 class HomeUserController extends AbstractController
 {
-    #[Route('/', name: '_home')]
+    #[\Symfony\Component\Routing\Attribute\Route('/', name: '_home')]
     public function index(): Response
     {
         return $this->render('user/index.html.twig', [

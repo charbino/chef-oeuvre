@@ -15,7 +15,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[Route('/user/overkill', name: 'overkill')]
+#[\Symfony\Component\Routing\Attribute\Route('/user/overkill', name: 'overkill')]
 class OverkillController extends AbstractController
 {
     public function __construct(
@@ -23,19 +23,19 @@ class OverkillController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: '_index')]
+    #[\Symfony\Component\Routing\Attribute\Route('/', name: '_index')]
     public function index(Request $request, MessageBusInterface $messageBus, HubInterface $hub): Response
     {
         $upload = new Upload();
         $form = $this->createForm(UploadType::class, $upload);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid() && $this->getUser() !== null) {
+        if ($form->isSubmitted() && $form->isValid() && $this->getUser() instanceof UserInterface) {
             $upload->setUploadBy($this->getUser());
             $this->em->persist($upload);
             $this->em->flush();
 
-            if ($upload->getImageFile() !== null) {
+            if ($upload->getImageFile() instanceof \Symfony\Component\HttpFoundation\File\File) {
                 $messageBus->dispatch(
                     new UploadMessage($upload->getImageFile(), $this->getUser()->getUserIdentifier())
                 );

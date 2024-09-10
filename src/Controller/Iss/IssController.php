@@ -13,10 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/iss', name: 'iss')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/iss', name: 'iss')]
 class IssController extends AbstractController
 {
-    #[Route('/index', name: '_index')]
+    #[\Symfony\Component\Routing\Attribute\Route('/index', name: '_index')]
     public function index(Request $request, SessionInterface $session): Response
     {
         return $this->render('iss/index.html.twig');
@@ -25,7 +25,7 @@ class IssController extends AbstractController
     /**
      * @return JsonResponse|AccessDeniedException
      */
-    #[Route('/position', name: '_position', options: ['expose' => true])]
+    #[\Symfony\Component\Routing\Attribute\Route('/position', name: '_position', options: ['expose' => true])]
     public function getPosition(Request $request, IssClient $client)
     {
         //        if (!$request->isXmlHttpRequest()) {

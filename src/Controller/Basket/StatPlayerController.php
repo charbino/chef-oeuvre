@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/basket/stat-player', name: 'basket_stat_player')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/basket/stat-player', name: 'basket_stat_player')]
 class StatPlayerController extends AbstractController
 {
     public function __construct(
@@ -28,7 +28,7 @@ class StatPlayerController extends AbstractController
     ) {
     }
 
-    #[Route('/index/{id}', name: '_index', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/index/{id}', name: '_index', options: ['expose' => true], methods: ['GET'])]
     public function index(Request $request): Response
     {
         $id = (int) $request->attributes->get('id');

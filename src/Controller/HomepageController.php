@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/', name: 'homepage')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/', name: 'homepage')]
 class HomepageController extends AbstractController
 {
-    #[Route('/', name: '_index')]
+    #[\Symfony\Component\Routing\Attribute\Route('/', name: '_index')]
     public function index(Request $request, SessionInterface $session): Response
     {
         return $this->render('homepage/homepage.html.twig');

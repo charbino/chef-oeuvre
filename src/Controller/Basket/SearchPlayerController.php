@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-#[Route(path: '/basket/search', name: 'basket_player')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/basket/search', name: 'basket_player')]
 class SearchPlayerController extends AbstractController
 {
     public function __construct(
@@ -25,7 +25,7 @@ class SearchPlayerController extends AbstractController
     ) {
     }
 
-    #[Route('/index', name: '_search', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/index', name: '_search', options: ['expose' => true], methods: ['GET'])]
     public function index(Request $request): Response
     {
         $query = $request->query->get('query', '');

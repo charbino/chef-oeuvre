@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/basket/players/comparator', name: 'basket_players_comparator')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/basket/players/comparator', name: 'basket_players_comparator')]
 class PlayersComparatorController extends AbstractController
 {
     public function __construct(
@@ -30,13 +30,13 @@ class PlayersComparatorController extends AbstractController
     ) {
     }
 
-    #[Route('/index', name: '_index', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/index', name: '_index', options: ['expose' => true], methods: ['GET'])]
     public function index(Request $request): Response
     {
         return $this->render('basket/comparator/index.html.twig');
     }
 
-    #[Route('/compare', name: '_compare', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/compare', name: '_compare', options: ['expose' => true], methods: ['GET'])]
     public function compare(Request $request): JsonResponse
     {
         $idPlayers = $request->get('ids');

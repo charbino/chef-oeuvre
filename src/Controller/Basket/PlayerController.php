@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
-#[Route(path: '/basket/player', name: 'basket_player')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/basket/player', name: 'basket_player')]
 class PlayerController extends AbstractController
 {
     public function __construct(
@@ -21,7 +21,7 @@ class PlayerController extends AbstractController
     ) {
     }
 
-    #[Route('/add', name: '_add', options: ['expose' => true], methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/add', name: '_add', options: ['expose' => true], methods: ['POST'])]
     public function add(Request $request): JsonResponse
     {
         $player = $this->serializer->deserialize($request->getContent(), Player::class, 'json', ['groups' => 'basket']);

@@ -12,16 +12,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/cities', name: 'cities')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/cities', name: 'cities')]
 class CitiesController extends AbstractController
 {
-    #[Route(path: '/', name: '_index')]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/', name: '_index')]
     public function cities(): Response
     {
         return $this->render('city/cities.html.twig', []);
     }
 
-    #[Route(path: '/city', name: '_search', options: ['expose' => true], methods: 'GET')]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/city', name: '_search', options: ['expose' => true], methods: 'GET')]
     public function getCities(Request $request, CityClient $cityClient): JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {
@@ -30,7 +30,7 @@ class CitiesController extends AbstractController
 
         $query = $request->query->get('query', '');
         $cites = $cityClient->getCitiesByName($query);
-        if (empty($cites)) {
+        if ($cites === []) {
             if (strlen($query) == 2) {
                 $cites = $cityClient->getCitiesByDepartmentCode($query);
             } else {
@@ -41,7 +41,7 @@ class CitiesController extends AbstractController
         return new JsonResponse(['cities' => $cites]);
     }
 
-    #[Route(path: '/departements', name: '_search_departments', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/departements', name: '_search_departments', options: ['expose' => true], methods: ['GET'])]
     public function getDepartments(Request $request, CityClient $cityClient): JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {
@@ -50,14 +50,14 @@ class CitiesController extends AbstractController
 
         $query = $request->query->get('query', '');
         $departments = $cityClient->getDepartmentByName($query);
-        if (empty($departments)) {
+        if ($departments === []) {
             $departments = $cityClient->getDepartmentByCode($query);
         }
 
         return new JsonResponse(['departments' => $departments]);
     }
 
-    #[Route(path: '/cities-informations', name: '_get_cities_informations_from_department', options: ['expose' => true], methods: [
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/cities-informations', name: '_get_cities_informations_from_department', options: ['expose' => true], methods: [
         'GET',
     ])]
     public function getCitiesInformationsFromDepartment(Request $request, CityClient $cityClient): JsonResponse

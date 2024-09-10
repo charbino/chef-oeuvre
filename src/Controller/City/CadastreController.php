@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/cadastre', name: 'cadastre')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/cadastre', name: 'cadastre')]
 class CadastreController extends AbstractController
 {
-    #[Route(path: '/city-informations', name: '_get_city_informations', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/city-informations', name: '_get_city_informations', options: ['expose' => true], methods: ['GET'])]
     public function getCityInformation(Request $request, CadastreClient $cadastreClient): JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {
@@ -24,7 +24,7 @@ class CadastreController extends AbstractController
         $query = $request->query->get('query');
         $city = $cadastreClient->getCity($query ?? '');
 
-        if ($city === null) {
+        if (!$city instanceof \App\Model\City\City) {
             return new JsonResponse(['error' => 'City not found'], 404);
         }
 

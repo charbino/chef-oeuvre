@@ -24,7 +24,7 @@ return static function (RectorConfig $rectorConfig): void {
         SymfonySetList::SYMFONY_60,
         SymfonySetList::SYMFONY_61,
         SymfonySetList::SYMFONY_62,
-        DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
-        SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
+        SymfonySetList::SYMFONY_63,
+        SymfonySetList::SYMFONY_64,
     ]);
 };

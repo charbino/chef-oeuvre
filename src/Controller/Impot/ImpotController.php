@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/', name: 'impots')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/', name: 'impots')]
 class ImpotController extends AbstractController
 {
-    #[Route('/impots', name: '_index')]
+    #[\Symfony\Component\Routing\Attribute\Route('/impots', name: '_index')]
     public function impot(Request $request, SessionInterface $session): Response
     {
         return $this->render('impots/impots.html.twig');

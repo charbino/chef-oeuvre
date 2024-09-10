@@ -29,7 +29,7 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
     ) {
     }
 
-    public function normalize($player, string $format = null, array $context = []): mixed
+    public function normalize($player, string $format = null, array $context = []): array|bool|string|int|float|null|\ArrayObject
     {
         return $this->normalizer->normalize($player, $format, $context);
     }

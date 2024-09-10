@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-#[Route(path: '/basket/players', name: 'basket_players')]
+#[\Symfony\Component\Routing\Attribute\Route(path: '/basket/players', name: 'basket_players')]
 class PlayersController extends AbstractController
 {
     public function __construct(
@@ -31,7 +31,7 @@ class PlayersController extends AbstractController
     ) {
     }
 
-    #[Route('/get', name: '_get', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/get', name: '_get', options: ['expose' => true], methods: ['GET'])]
     public function get(Request $request): JsonResponse
     {
         $serializer = new Serializer([new ObjectNormalizer()], ['json' => new JsonEncoder()]);
