@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace App\Client;
 
-use Psr\Http\Client\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class BasketClient
@@ -87,15 +83,16 @@ class BasketClient
     }
 
     /**
-     * @param array<int> $ids
-     * @param array<string,string> $filters
+     * @param array<string> $ids
+     * @param array<string> $filters
      * @return array<mixed>
      */
     public function getStatPlayers(array $ids, array $filters = []): array
     {
         //use this function for not have index in query string parameter
         //see : https://stackoverflow.com/questions/60440737/symfony-httpclient-get-request-with-multiple-query-string-parameters-with-same-n
-        $url = self::URL . 'stats?' . $this->createQueryString(array_merge(array_values($ids), $filters));
+        $queryArray = array_merge(array_values($ids), $filters);
+        $url = self::URL . 'stats?' . $this->createQueryString($queryArray);
 
         $response = $this->client->request('GET', $url, [
             'headers' => [

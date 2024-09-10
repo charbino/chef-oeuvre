@@ -97,7 +97,8 @@ services:
     mailer:
         image: maildev/maildev
         ports:
-            - "1180:80"
+            - "1180:1080"
+            - "1125:1025"
 
     minio:
         image: minio/minio

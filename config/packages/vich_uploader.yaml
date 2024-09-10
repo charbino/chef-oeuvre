@@ -8,3 +8,4 @@ vich_uploader:
         upload:
             uri_prefix: /upload
             upload_destination: aws.storage
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

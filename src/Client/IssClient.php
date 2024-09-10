@@ -31,18 +31,22 @@ class IssClient
      */
     public function getCurrentPosition(): array
     {
-        $idSatelite = $this->getSatelliteId();
-        $sateliteData = $this->getDataSatellite($idSatelite);
+        $idSatellite = $this->getSatelliteId();
+        if ($idSatellite === null) {
+            return [];
+        }
+
+        $satelliteData = $this->getDataSatellite($idSatellite);
 
         $dateNow = new DateTime();
         return [
-            'latitude' => $sateliteData['latitude'],
-            'longitude' => $sateliteData['longitude'],
-            'speed' => $sateliteData['velocity'],
-            'units' => $sateliteData['units'],
-            'dateTime' => date('d-m-Y H:i', $sateliteData['timestamp']),
-            'visibility' => $sateliteData['visibility'],
-            'altitude' => $sateliteData['altitude'],
+            'latitude' => $satelliteData['latitude'],
+            'longitude' => $satelliteData['longitude'],
+            'speed' => $satelliteData['velocity'],
+            'units' => $satelliteData['units'],
+            'dateTime' => date('d-m-Y H:i', $satelliteData['timestamp']),
+            'visibility' => $satelliteData['visibility'],
+            'altitude' => $satelliteData['altitude'],
             'now' => $dateNow->format('d-m-Y H:i'),
         ];
     }
@@ -61,14 +65,14 @@ class IssClient
     }
 
     /**
-     * @param int $idSattelite
+     * @param int $idSatellite
      * @return array<mixed>
      */
-    public function getDataSatellite(int $idSattelite): array
+    public function getDataSatellite(int $idSatellite): array
     {
         $response = $this->client->request(
             'GET',
-            self::URL_SATELLITE . '/' . $idSattelite,
+            self::URL_SATELLITE . '/' . $idSatellite,
             [
                 'headers' =>
                     [

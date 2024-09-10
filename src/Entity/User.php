@@ -32,10 +32,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     /**
-     * @var ArrayCollection<int,Upload>
+     * @var Collection<int,Upload>
      */
     #[ORM\OneToMany(mappedBy: 'uploadBy', targetEntity: Upload::class)]
-    private ArrayCollection $uploads;
+    private Collection $uploads;
 
     public function __construct()
     {

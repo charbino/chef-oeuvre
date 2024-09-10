@@ -18,11 +18,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[Route('/user/overkill', name: 'overkill')]
 class OverkillController extends AbstractController
 {
-    private EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
-        $this->em = $em;
     }
 
     #[Route('/', name: '_index')]
@@ -32,13 +29,15 @@ class OverkillController extends AbstractController
         $form = $this->createForm(UploadType::class, $upload);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $this->getUser() !== null) {
             $upload->setUploadBy($this->getUser());
             $this->em->persist($upload);
             $this->em->flush();
 
-            $messageBus->dispatch(new UploadMessage($upload->getImageFile(), $this->getUser()->getUserIdentifier()));
-            $this->sendMercure($hub, $this->getUser());
+            if ($upload->getImageFile() !== null) {
+                $messageBus->dispatch(new UploadMessage($upload->getImageFile(), $this->getUser()->getUserIdentifier()));
+                $this->sendMercure($hub, $this->getUser());
+            }
 
             return $this->redirectToRoute('overkill_index');
         }
@@ -62,6 +61,6 @@ class OverkillController extends AbstractController
             'overkill_send',
             json_encode(['id' => $user->getUserIdentifier()], JSON_THROW_ON_ERROR)
         );
-        $hub->publish($update);
+//        $hub->publish($update);
     }
 }

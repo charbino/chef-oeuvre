@@ -17,8 +17,8 @@ class Upload
     #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $imageName;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $imageName = null;
 
     #[Vich\UploadableField(mapping: 'upload', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;

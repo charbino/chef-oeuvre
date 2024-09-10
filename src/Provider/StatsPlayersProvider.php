@@ -25,7 +25,7 @@ class StatsPlayersProvider implements StatsPlayersProviderInterface
     }
 
     /**
-     * @param array<int> $idPlayers
+     * @param array<string> $idPlayers
      * @param array<string> $seasons
      * @return array|mixed[]
      */

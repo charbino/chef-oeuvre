@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace App\Message;
 
+use Symfony\Component\HttpFoundation\File\File;
+
 class UploadMessage
 {
-    private string $upload;
+    private File $upload;
     private string $user;
 
-    public function __construct(string $upload, string $user)
+    public function __construct(File $upload, string $user)
     {
         $this->upload = $upload;
         $this->user = $user;
     }
 
-    public function getUpload(): string
+    public function getUpload(): File
     {
         return $this->upload;
     }
 
-    public function setUpload(string $upload): void
+    public function setUpload(File $upload): void
     {
         $this->upload = $upload;
     }
