@@ -37,7 +37,6 @@ class CadastreClient
     }
 
     /**
-     * @param City $city
      * @return array<mixed>|null
      */
     public function getPlots(City $city): ?array
@@ -49,7 +48,6 @@ class CadastreClient
     }
 
     /**
-     * @param City $city
      * @return array<mixed>|null
      */
     public function getParcelles(City $city): ?array

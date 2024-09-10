@@ -27,8 +27,7 @@ class PlayersComparatorController extends AbstractController
     public function __construct(
         private StatsPlayersProviderInterface $statsPlayersProvider,
         private GraphicsStatsPlayerProviderInterface $graphicsStatsPlayerProvider
-    )
-    {
+    ) {
     }
 
     #[Route('/index', name: '_index', options: ['expose' => true], methods: ['GET'])]
@@ -53,7 +52,7 @@ class PlayersComparatorController extends AbstractController
         }
 
         return new JsonResponse([
-            'graphic' => $this->graphicsStatsPlayerProvider->provide($stats)
+            'graphic' => $this->graphicsStatsPlayerProvider->provide($stats),
         ]);
     }
 }

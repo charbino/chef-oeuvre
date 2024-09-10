@@ -26,9 +26,6 @@ class BasketClient
     }
 
     /**
-     * @param string $search
-     * @param int $page
-     * @param int $perPage
      * @return array<mixed>
      */
     public function getPlayers(string $search, int $page = 0, int $perPage = 25): array
@@ -57,7 +54,6 @@ class BasketClient
     }
 
     /**
-     * @param int $id
      * @return array<mixed>
      */
     public function getStatPlayer(int $id): array
@@ -67,7 +63,7 @@ class BasketClient
             self::URL . 'stats',
             [
                 'query' => [
-                    'player_ids' => [$id]
+                    'player_ids' => [$id],
                 ],
                 'headers' => [
                     'Authorization' => self::API_KEY,
@@ -109,7 +105,6 @@ class BasketClient
 
     /**
      * @param array<string> $queryArray
-     * @return string|null
      */
     private function createQueryString(array $queryArray = []): ?string
     {

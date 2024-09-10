@@ -19,8 +19,7 @@ class IssClient
 
     public function __construct(
         private HttpClientInterface $client,
-    )
-    {
+    ) {
         $this->client = $this->client->withOptions([
             'base_uri' => self::URL,
         ]);
@@ -65,7 +64,6 @@ class IssClient
     }
 
     /**
-     * @param int $idSatellite
      * @return array<mixed>
      */
     public function getDataSatellite(int $idSatellite): array
@@ -78,7 +76,8 @@ class IssClient
                     [
                         'Accept' => 'application/json',
                     ],
-            ]);
+            ]
+        );
 
         return $response->toArray();
     }

@@ -18,8 +18,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[Route('/user/overkill', name: 'overkill')]
 class OverkillController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em)
-    {
+    public function __construct(
+        private EntityManagerInterface $em
+    ) {
     }
 
     #[Route('/', name: '_index')]
@@ -35,7 +36,9 @@ class OverkillController extends AbstractController
             $this->em->flush();
 
             if ($upload->getImageFile() !== null) {
-                $messageBus->dispatch(new UploadMessage($upload->getImageFile(), $this->getUser()->getUserIdentifier()));
+                $messageBus->dispatch(
+                    new UploadMessage($upload->getImageFile(), $this->getUser()->getUserIdentifier())
+                );
                 $this->sendMercure($hub, $this->getUser());
             }
 
@@ -47,9 +50,6 @@ class OverkillController extends AbstractController
         ]);
     }
 
-    /**
-     * @throws \JsonException
-     */
     private function sendMercure(HubInterface $hub, UserInterface $user): void
     {
         //        $encoders = [new JsonEncoder()];
@@ -61,6 +61,6 @@ class OverkillController extends AbstractController
             'overkill_send',
             json_encode(['id' => $user->getUserIdentifier()], JSON_THROW_ON_ERROR)
         );
-//        $hub->publish($update);
+        //        $hub->publish($update);
     }
 }

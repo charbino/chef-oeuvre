@@ -15,19 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/cities', name: 'cities')]
 class CitiesController extends AbstractController
 {
-    /**
-     * @return Response
-     */
     #[Route(path: '/', name: '_index')]
     public function cities(): Response
     {
         return $this->render('city/cities.html.twig', []);
     }
 
-    /**
-     **
-     * @return JsonResponse
-     */
     #[Route(path: '/city', name: '_search', options: ['expose' => true], methods: 'GET')]
     public function getCities(Request $request, CityClient $cityClient): JsonResponse
     {
@@ -48,9 +41,6 @@ class CitiesController extends AbstractController
         return new JsonResponse(['cities' => $cites]);
     }
 
-    /**
-     * @return JsonResponse
-     */
     #[Route(path: '/departements', name: '_search_departments', options: ['expose' => true], methods: ['GET'])]
     public function getDepartments(Request $request, CityClient $cityClient): JsonResponse
     {
@@ -67,9 +57,6 @@ class CitiesController extends AbstractController
         return new JsonResponse(['departments' => $departments]);
     }
 
-    /**
-     * @return JsonResponse
-     */
     #[Route(path: '/cities-informations', name: '_get_cities_informations_from_department', options: ['expose' => true], methods: [
         'GET',
     ])]

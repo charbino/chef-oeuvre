@@ -25,8 +25,7 @@ class CityClient
 
     public function __construct(
         private HttpClientInterface $client,
-    )
-    {
+    ) {
         $this->client = $this->client->withOptions([
             'base_uri' => self::URL,
         ]);
@@ -41,8 +40,6 @@ class CityClient
     }
 
     /**
-     * @param string $parameter
-     * @param string $value
      * @return array<mixed>
      */
     public function getDeparmentsBy(string $parameter, string $value): array
@@ -57,7 +54,6 @@ class CityClient
     }
 
     /**
-     * @param string $name
      * @return array<mixed>
      */
     public function getDepartmentByName(string $name): array
@@ -66,7 +62,6 @@ class CityClient
     }
 
     /**
-     * @param string $code
      * @return mixed[]
      */
     public function getDepartmentByCode(string $code): array
@@ -90,7 +85,6 @@ class CityClient
     }
 
     /**
-     * @param string $name
      * @return array<mixed>
      */
     public function getCitiesByName(string $name): array
@@ -99,7 +93,6 @@ class CityClient
     }
 
     /**
-     * @param string $postCode
      * @return array<mixed>
      */
     public function getCitiesByCodePostal(string $postCode): array
@@ -108,7 +101,6 @@ class CityClient
     }
 
     /**
-     * @param string $departmentCode
      * @return array<mixed>
      */
     public function getCitiesByDepartmentCode(string $departmentCode): array
@@ -117,7 +109,6 @@ class CityClient
     }
 
     /**
-     * @param string $departmentCode
      * @return array<mixed>
      */
     public function getCitiesInformationsByDepartmentCode(string $departmentCode): array

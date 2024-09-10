@@ -16,10 +16,7 @@ namespace App\Model\City;
 final class City
 {
     /**
-     * @param string $id
      * @param array<mixed> $geometry
-     * @param string $geometry_name
-     * @param CityProperties $properties
      * @param array<mixed> $bbox
      */
     public function __construct(

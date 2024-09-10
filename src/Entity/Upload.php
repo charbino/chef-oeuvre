@@ -26,7 +26,6 @@ class Upload
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'uploads')]
     private ?UserInterface $uploadBy;
 
-
     public function setId(?int $id): void
     {
         $this->id = $id;
