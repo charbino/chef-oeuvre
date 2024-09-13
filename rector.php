@@ -26,5 +26,6 @@ return static function (RectorConfig $rectorConfig): void {
         SymfonySetList::SYMFONY_62,
         SymfonySetList::SYMFONY_63,
         SymfonySetList::SYMFONY_64,
+        SymfonySetList::SYMFONY_70,
     ]);
 };

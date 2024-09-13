@@ -16,6 +16,7 @@ namespace App\Normalizer\Basket;
 use App\Entity\Basket\Player;
 use App\Repository\Basket\TeamRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -24,9 +25,11 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
 {
     public function __construct(
-        private ObjectNormalizer $normalizer,
-        private TeamRepository $teamRepository
-    ) {
+        #[Autowire(service: 'serializer.normalizer.object')]
+        private readonly NormalizerInterface $normalizer,
+        private readonly TeamRepository $teamRepository
+    )
+    {
     }
 
     public function normalize($player, string $format = null, array $context = []): array|bool|string|int|float|null|\ArrayObject
@@ -42,7 +45,7 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
         return $data instanceof Player;
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
     {
         $denormalized = $this->normalizer->denormalize($data, $type, $format, $context);
 
@@ -54,8 +57,15 @@ class PlayerNormalizer implements NormalizerInterface, DenormalizerInterface
         return $denormalized;
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return class_exists($type) || (interface_exists($type, false));
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            Player::class => true,
+        ];
     }
 }
