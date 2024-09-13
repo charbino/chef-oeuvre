@@ -6,6 +6,13 @@
 @import "~@mdi/font/css/materialdesignicons.min.css";
 @import 'buefy/dist/buefy.css';
 
+
+.navbar-brand-svg
+{
+  height: 3.5rem;
+  width: 7.5rem;
+}
+
 .bd-navbar {
   //font-size: 1.125rem;
   //padding: 2rem 4rem;
