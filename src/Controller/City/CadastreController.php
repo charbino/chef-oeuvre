@@ -9,12 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Routing\Annotation\Route;
 
 #[\Symfony\Component\Routing\Attribute\Route(path: '/cadastre', name: 'cadastre')]
 class CadastreController extends AbstractController
 {
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/city-informations', name: '_get_city_informations', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/city-informations', name: '_get_city_informations', options: ['expose' => true], methods: [
+        'GET',
+    ])]
     public function getCityInformation(Request $request, CadastreClient $cadastreClient): JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {

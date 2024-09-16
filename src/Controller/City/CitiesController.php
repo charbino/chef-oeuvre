@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Routing\Annotation\Route;
 
 #[\Symfony\Component\Routing\Attribute\Route(path: '/cities', name: 'cities')]
 class CitiesController extends AbstractController
@@ -41,7 +40,9 @@ class CitiesController extends AbstractController
         return new JsonResponse(['cities' => $cites]);
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/departements', name: '_search_departments', options: ['expose' => true], methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/departements', name: '_search_departments', options: ['expose' => true], methods: [
+        'GET',
+    ])]
     public function getDepartments(Request $request, CityClient $cityClient): JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {

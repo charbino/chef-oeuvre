@@ -16,7 +16,6 @@ namespace App\Controller\Basket;
 use App\Repository\Basket\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 #[\Symfony\Component\Routing\Attribute\Route(path: '/basket', name: 'basket')]
 class BasketController extends AbstractController

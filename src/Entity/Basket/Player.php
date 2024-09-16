@@ -19,8 +19,8 @@ class Player
     #[Groups(['basket'])]
     private ?int $id = null;
 
-    #[Groups(['basket'])]
     #[ORM\Column]
+    #[Groups(['basket'])]
     private ?int $externalId = null;
 
     #[ORM\Column(length: 255)]

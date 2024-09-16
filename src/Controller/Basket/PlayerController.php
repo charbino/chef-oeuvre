@@ -5,29 +5,39 @@ declare(strict_types=1);
 namespace App\Controller\Basket;
 
 use App\Entity\Basket\Player;
+use App\Repository\Basket\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
-#[\Symfony\Component\Routing\Attribute\Route(path: '/basket/player', name: 'basket_player')]
+#[Route(path: '/basket/player', name: 'basket_player')]
 class PlayerController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private SerializerInterface $serializer
+        private TeamRepository $teamRepository,
     ) {
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route('/add', name: '_add', options: ['expose' => true], methods: ['POST'])]
+    #[Route('/add', name: '_add', options: ['expose' => true], methods: ['POST'])]
     public function add(Request $request): JsonResponse
     {
-        $player = $this->serializer->deserialize($request->getContent(), Player::class, 'json', ['groups' => 'basket']);
-        dump($player);
-        dump($request->getContent());
-        //TODO MAYBE USE VALIDATOR
+        $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+        $player = $serializer->deserialize($request->getContent(), Player::class, 'json', [
+            AbstractNormalizer::GROUPS => 'basket',
+            AbstractNormalizer::CALLBACKS => [
+                'team' => function (array $value, string $entity, string $attributeName) {
+                    return $this->teamRepository->find($value['id']);
+                },
+            ],
+        ]);
+
 
         $this->entityManager->persist($player);
         $this->entityManager->flush();
