@@ -2,12 +2,12 @@
 
 Le projet Chef d'Oeuvre est un projet qui me permet d'experimenter toutes les technologies afin de faire de le veille.
 
-Ce projet repose sur un socle Symfony 6.1 et VueJs 3 et utilise docker pour toutes les briques externes (elasticsearch, mysql, redis ...)
+Ce projet repose sur un socle Symfony 7.1 et VueJs 3 et utilise docker pour toutes les briques externes (elasticsearch, mysql, redis ...)
 
 Pour le front, j'utilise le framework css [bulma](https://bulma.io/).
 ### Technologies :
 - PHP 8.1
-- Symfony 6.2
+- Symfony 7.1
 - VueJs 3
 
 
@@ -25,6 +25,9 @@ Usage
 ```bash
 cd my_project/
 symfony serve:start -d
+
+For mercure : 
+symfony server:start --no-tls -d 
 ```
 
 ### Docker : 
